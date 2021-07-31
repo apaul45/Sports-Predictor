@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+    <link href="styles/style.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+    div{
+        font-family: 'Qahiri', sans-serif;
+    }
+    h1{
+        background-image: url(https://www.hdwallpaper.nu/wp-content/uploads/2017/03/grey-1.jpg);
+        background-size: 100% 100%;
+		color: black;
+		padding: 20px;
+        text-align: center;
+        position: relative;
+        top: -30px;
+    }
+    ol, .segundo{
+        color: blueviolet;
+        margin-top: 50px;
+		font-family: "Courier New", Courier, monospace;
+		font-size: 18px;
+		letter-spacing: 2px;
+		word-spacing: 0px;
+		font-weight: 700;
+		text-decoration: none;
+		font-style: normal;
+		font-variant: normal;
+		text-transform: none;
+    }
+    .segundo{
+        text align: left;
+    }
+    ol{
+        border-radius: 10px;
+        border-style: dotted; 
+		/* Need the 2 lines below to make the border resize to fit text */
+		display: inline-block;
+		width: auto;
+    }
+    #passcodeContainer{
+        float: right;
+    }
+    #userContainer{
+        float: left;
+    }
+    /* To center an image, have to set horz margins to auto and set as a block
+    */
+    #drose-lol{
+        display:block;
+        margin-left: auto;
+        margin-right: auto;
+        width:50%;
+    }
+    button:hover.tablist{
+        background-color: blue;
+        color: white;
+	}
+    button:active.tablist{
+        background-color: green;
+        color:beige;
+    }
+	button:hover#fball{
+		animation-name: ball;
+		animation-duration: 1s;
+		animation-fill-mode: forwards;
+	}
+	button:active#fball{
+		background-image: url(https://i.kym-cdn.com/entries/icons/original/000/023/815/rodgers.jpg);
+		background-size: 100% 100%;
+	}
+	@keyframes ball{
+		0%{
+			transform: scale(0.3);
+		}
+		50%{
+			border-width:10px;
+			border-color: red;
+		}
+		100%{
+			border-width: 30px;
+			/*border-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/0b604440383369.577d39ee68674.jpg) 100 stretch;*/
+			border-image: url(https://www.uidownload.com/files/766/762/374/nfl-team-vector-logos.jpg) 100 stretch;
+		}
+	}
+	button:hover#bball{
+		animation: ball2;
+		animation-duration: 1s;
+		animation-fill-mode: forwards;
+	}
+	button:active#bball{
+		background-image: url(https://4.bp.blogspot.com/-ygULFqBksYM/UWbr9ZmFOlI/AAAAAAAARfA/Xi-cHwIFz50/s1600/lebron-james-ugly-funny-annoying-face-sucks-player-nba-funny-meme-jokes-photos-2013.jpg);
+		background-size: 100%;
+	}
+	@keyframes ball2{
+		0%{
+			transform: scale(0.3);
+			border-radius: 12px;
+		}
+		50%{
+			border-width:10px;
+			border-color: blye;
+			border-radius: 12px;
+		}
+		100%{
+			border-width: 30px;
+			border-image: url(https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX17637887.jpg) 100 stretch;
+			border-radius: 12px;
+		}
+	}
+    #userPass{
+        line-height: 10em;
+    }
+    .tablist{
+        padding: 10px;
+    }
+	/* To center a tab (aka buttons), can use flexbox on the container 
+    containing the buttons, aka the surrounding div element */
+    #tabs-open{
+        padding: 8px 8px 8px 8px;
+        position: relative;
+        top: -55px;
+        background-image: url(https://ak.picdn.net/shutterstock/videos/14063324/thumb/2.jpg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+	#choose2{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+    body{
+        /*background-image: url(http://wallpoper.com/images/00/44/93/89/light-background_00449389.jpg);*/
+		/*background-image: url(https://img.wallpapersafari.com/desktop/1920/1080/45/60/iMb85R.jpg);*/
+		/*background-image: url(https://images.alphacoders.com/812/81223.jpg);*/
+		/*background-color: #f5efef;*/
+		background-image: url(https://st4.depositphotos.com/32273002/40701/i/950/depositphotos_407019050-stock-photo-white-light-texture-background-copy.jpg);
+		width: auto;
+    }
+    .tabs-closed{
+        display: none;
+    }
+    #Select.firstclass{
+        display: block;
+    }
+	.firstclass{
+		display:none;
+	}
+	.currentSports{
+		width:550px;
+		height: 400px;
+		position: relative;
+		bottom: -100px;
+	}
+	#firstgif{
+		position: relative;
+		top: -100px;
+		right: -20px;
+	}
+	#bball{
+		float: left;
+		position:relative;
+		right: -170px;
+		background-image: url(https://d.newsweek.com/en/full/836813/lebron-james.jpg);
+		background-size: 100% 100%;
+		border-radius: 12px;
+	}
+
+	#bballContainer{
+		font-family:'Courier New', Courier, monospace;
+		color:aliceblue;
+		font-size: 30px;
+		position: relative;
+		top: -150px;
+		left: -150px;
+	}
+	#fball{
+		float: right;
+		position: relative;
+		left: -230px;
+		background-image: url(https://www.masslive.com/resizer/u1AM7t4evElfZFI3XFU9WqP7T1o=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/CAWM55Z4SNFNFOWTQYTYHXIP4I.jpg);
+		background-size: 100% 100%;
+		border-radius: 12px;
+	}
+	#fballContainer{
+		font-family:'Courier New', Courier, monospace;
+		color:aliceblue;
+		font-size: 30px;
+		position: relative;
+		top: -150px;
+		left: 175px;
+	}
+	#Bball h1{
+		background-image: url(https://www.desktopbackground.org/p/2011/08/11/248597_pictures-basketball-court-backgrounds_960x600_h.gif);
+		background-color: orange;
+		color: whitesmoke;
+		width: 100%;
+	}
+	#Fball h1{
+		background-image: url(https://cdn.pngsumo.com/pitch-soccer-field-background-green-football-field-background-image-green-grass-football-in-grass-png-390_260.png);
+		color: whitesmoke;
+		width: 100%;
+	}
+	#selectplayer{
+		display:none;
+		position: relative;
+		bottom: -20px;
+	}
+	#selectplayer2{
+		display:none;
+		position: relative;
+		bottom: -20px;
+	}
+	#healthy_radio{
+		display:inline-block;
+		width: auto;
+		border-color: purple;
+		border-radius: 15px;
+		border-style:double;
+	}
+	.method_list{
+		width:200px;
+		height:120px;
+	}
+	.form{
+		position: absolute;
+		right: 420px;
+	}
+	.display_future_stats{
+		display: none;
+		width: auto;
+		position: absolute;
+		right: 300px;
+		top: 1150px;
+		/* border-radius: 20px;
+		border-style: groove;
+		border-color: olivedrab;  */
+	}
+	.fade-in {
+	animation: fadeIn ease 4s;
+	-webkit-animation: fadeIn ease 6s;
+	-moz-animation: fadeIn ease 6s;
+	-o-animation: fadeIn ease 6s;
+	-ms-animation: fadeIn ease 6s;
+	}
+	@keyframes fadeIn {
+	0% {
+		opacity:0;
+	}
+	100% {
+		opacity:1;
+	}
+	}
+
+	@-moz-keyframes fadeIn {
+	0% {
+		opacity:0;
+	}
+	100% {
+		opacity:1;
+	}
+	}
+
+	@-webkit-keyframes fadeIn {
+	0% {
+		opacity:0;
+	}
+	100% {
+		opacity:1;
+	}
+	}
+
+	@-o-keyframes fadeIn {
+	0% {
+		opacity:0;
+	}
+	100% {
+		opacity:1;
+	}
+	}
+
+	@-ms-keyframes fadeIn {
+	0% {
+		opacity:0;
+	}
+	100% {
+		opacity:1;
+		}
+	}
+	.fade-out {
+	animation: fadeOut ease 8s;
+	-webkit-animation: fadeOut ease 8s;
+	-moz-animation: fadeOut ease 8s;
+	-o-animation: fadeOut ease 8s;
+	-ms-animation: fadeOut ease 8s;
+	}
+	@keyframes fadeOut {
+	0% {
+		opacity:1;
+	}
+	100% {
+		opacity:0;
+	}
+	}
+
+	@-moz-keyframes fadeOut {
+	0% {
+		opacity:1;
+	}
+	100% {
+		opacity:0;
+	}
+	}
+
+	@-webkit-keyframes fadeOut {
+	0% {
+		opacity:1;
+	}
+	100% {
+		opacity:0;
+	}
+	}
+
+	@-o-keyframes fadeOut {
+	0% {
+		opacity:1;
+	}
+	100% {
+		opacity:0;
+	}
+	}
+
+	@-ms-keyframes fadeOut {
+	0% {
+		opacity:1;
+	}
+	100% {
+		opacity:0;
+	}
+}
+</style>
+    <head>
+        <title>
+            Sports Predictor
+        </title>
+    </head>
+    <body>
+        <div id="About" class="tabs-closed">
+            <h1>About</h1>
+            <div id="tabs-open">
+                <button class="tablist" onClick="openTab(event, 'About')">About</button>
+                <button class="tablist" onClick="openTab(event, 'Select')">Select a Player</button>
+                <button class="tablist" onClick="openTab(event, 'How')">How It's Done</button>
+            </div>
+            <p>This page is about figuring out a player's future stats given factors like their age. Not meant to be taken seriously.</p>
+        </div>
+        <div id="How" class="tabs-closed">
+            <h1>How The Stats Are Determined</h1>
+            <div id="tabs-open">
+                <button class="tablist" onClick="openTab(event, 'About')">About</button>
+                <button class="tablist" onClick="openTab(event, 'Select')">Select a Player</button>
+                <button class="tablist" onClick="openTab(event, 'How')">How It's Done</button>
+            </div>
+            <p>Future stats are determined by a variety of factors, some of which are:
+            <ul>
+                <li>Player's Age (Are they entering a prime? Leaving? In it?)</li>
+                <li>Current state of their team (Is their team losing? The more they are, the more that player gets to shine</li>
+                <li>Future state of their team (Any free agent moves? Big draft picks?)</li>
+                <li>Position (Some get more possession than others)</li>
+            </ul>
+            None of this should be taken seriously of course, as it is impossible to guarantee what a player will 
+            do in the future. </p>
+            <img id="drose-lol"src= https://i.pinimg.com/originals/7d/e1/d2/7de1d2199b9af8313d4d710fb7e4bb70.jpg>
+        </div>
+        <div id= "Select" class="firstclass tabs-closed"> 
+            <h1>Sports Predictor </h1>
+			<div id="tabs-open">
+				<button class="tablist" onClick="openTab(event, 'About')">About</button>
+				<button class="tablist" onClick="openTab(event, 'Select')">Select a Player</button>
+				<button class="tablist" onClick="openTab(event, 'How')">How It's Done</button>
+			</div>
+            <button id="fball" class="currentSports" onClick="openTab(event, 'Fball')"><div id = "fballContainer"><strong>Football</strong></div></button>
+            <button id="bball" class = "currentSports" onClick="openTab(event, 'Bball')"><div id = "bballContainer"><strong>Basketball</strong></div></button>
+        </div>
+		<div id="Bball" class = "firstclass">
+			<h1>Sports Predictor (Basketball)</h1>
+			<div id="tabs-open">
+				<button class="tablist" onClick="openTab(event, 'About')">About</button>
+				<button class="tablist" onClick="openTab(event, 'Select')">Select a Player</button>
+				<button class="tablist" onClick="openTab(event, 'How')">How It's Done</button>
+			</div>
+			<strong style="display: flex; justify-content: center; align-content: center;">How would you like to input the required information?</strong><br>
+			<div id="choose_method">
+				<div id = "choose2">
+					<button class="method_list" id="shorter" onclick="openMethod('shorter')"><p><strong><u>Shorter method</u></strong>: requires less information to be 
+					entered but may take longer and/or produce inaccurate/no results at all</p></button>
+					<button class="method_list" onclick="openMethod('longer')"><strong style="color: green;">(Recommended)</strong><p><strong><u> Longer method</u></strong>: requires a lot more information to be 
+					entered manually but may produce quicker and more accurate results</p></button>
+				</div>
+				<iframe id = "firstgif" src="https://giphy.com/embed/cncZ8WkMGM1aY2FuAS" width="400" height="350" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/nba-utah-jazz-donovan-spida-cncZ8WkMGM1aY2FuAS">via GIPHY</a></p>
+				<div class="display_future_stats fade-in" id="fade_in_stats">
+					<strong style="font-size: large; color:blue">Prediction successful, please check the list below</strong>
+				</div>
+				<div class = "display_future_stats fade-out" id="fade_out_stats">
+					<strong style="font-size: large; color:blue">Prediction successful, please check the list below</strong>
+				</div>
+			</div>
+			<div id="selectplayer">
+				<label for="chooseplayer"> Enter Player Name, Age, and Team Abbreviation (Comma Separated)</label>
+				<input type=text id="chooseplayer" name="chooseplayer" required><br>
+				<strong>How injured was this player's team last season?</strong>
+				<strong>(<u style="color: blue;">Answer for player's current team</u>)</strong><br>
+				<div id=healthy_radio>
+					<label class="radio_inline">
+						<input type="radio" name="injury_state" id="0health" onclick="changeCheck('0health')">All Healthy
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="injury_state" id="1health" onclick="changeCheck('1health')">Mostly Healthy
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="injury_state" id="2health" onclick="changeCheck('2health')">Sometimes/Fairly Healthy
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="injury_state" id="3health" onclick="changeCheck('3health')">Rarely Healthy
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="injury_state" id="none_health" checked onclick="changeCheck('none_health')">None Selected
+					</label>
+				</div><br>
+				<div id=role_radio>
+					<strong>What is this player's role/ability?</strong><br>
+					<label class="radio_inline">
+						<input type="radio" name="player_state" id="0star" onclick="changeCheck('0star')" value="Superstar">Superstar
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="player_state" id="1star" onclick="changeCheck('1star')" value="Star">Star
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="player_state" id="2star" onclick="changeCheck('2star')" value="All Star">All Star
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="player_state" id="3role"  onclick="changeCheck('3role')" value="Role Player">Role Player
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="player_state" id="4reserve"  onclick="changeCheck('4reserve')" value="Reserve">Reserve
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="player_state" id="none_role" checked onclick="changeCheck('none_role')">None selected
+					</label>
+				</div>
+				<div id=fadraft_radio>
+					<strong>How was the player's team draft and/or free agency wise? (<u style="color: blue;">Answer for player's current team</u>)</strong><br>
+					<label class="radio_inline">
+						<input type="radio" name="fadraft_state" id="0fadrft" onclick="changeCheck('0fadrft')">Amazing
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="fadraft_state" id="1fadrft" onclick="changeCheck('1fadrft')" checked>Good
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="fadraft_state" id="2fadrft" onclick="changeCheck('2fadrft')">Decent
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="fadraft_state" id="3fadrft" onclick="changeCheck('3fadrft')">Terrible
+					</label>
+					<label class="radio_inline">
+						<input type="radio" name="fadraft_state" id="fadrft_none" checked onclick="changeCheck('fadrft_none')">None selected
+					</label>
+				</div>
+				<input type="submit" onclick="fetchFutureStats()" value="Submit">
+			</div>
+			<div id="selectplayer2">
+				<form id="primaryform" onsubmit="return false">
+					<label for="entername">Enter the player's full name</label>
+					<input type="text" class = "form" id="entername"><br>
+					<label for="enterage">Enter the player's age</label>
+					<input type="text" class = "form" id="enterage"><br>
+					<label for="gp">Enter games played (gp)</label>
+					<input type="text" class = "form" id="gp"><br>
+					<label for="enterteam">Enter the player's team (as abbreviation)</label>
+					<input type="text" class = "form" id="enterteam"><br>
+					<label for="enterppg">Enter the player's points per game(ppg)</label>
+					<input type="text" class = "form" id="enterppg"><br>
+					<label for="enterrpg">Enter the player's rebounds per game(rpg)</label>
+					<input type="text" class = "form" id="enterrpg"><br>
+					<label for="enterapg">Enter the player's assists per game(apg)</label>
+					<input type="text" class = "form" id="enterapg"><br>
+					<label for="enterspg">Enter the player's steals per game(spg)</label>
+					<input type="text" class = "form" id="enterspg"><br>
+					<label for="enterbpg">Enter the player's blocks per game(bpg)</label>
+					<input type="text" class = "form" id="enterbpg"><br>
+					<strong>How injured was this player's team last season?</strong>
+					<strong>(<u style="color: blue;">Answer for player's current team</u>)</strong><br>
+					<div id=healthy_radio>
+						<label class="radio_inline">
+							<input type="radio" name="injury_state" id="0health" onclick="changeCheck('0health')">All Healthy
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="injury_state" id="1health" onclick="changeCheck('1health')">Mostly Healthy
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="injury_state" id="2health" onclick="changeCheck('2health')">Sometimes/Fairly Healthy
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="injury_state" id="3health" onclick="changeCheck('3health')">Rarely Healthy
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="injury_state" id="none_health" checked onclick="changeCheck('none_health')">None Selected
+						</label>
+					</div><br>
+					<div id=role_radio>
+						<strong>What is this player's role/ability?</strong><br>
+						<label class="radio_inline">
+							<input type="radio" name="player_state" id="0star" onclick="changeCheck('0star')" value="Superstar">Superstar
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="player_state" id="1star" onclick="changeCheck('1star')" value="Star">Star
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="player_state" id="2star" onclick="changeCheck('2star')" value="All Star">All Star
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="player_state" id="3role"  onclick="changeCheck('3role')" value="Role Player">Role Player
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="player_state" id="4reserve"  onclick="changeCheck('4reserve')" value="Reserve">Reserve
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="player_state" id="none_role" checked onclick="changeCheck('none_role')">None selected
+						</label>
+					</div>
+					<div id=fadraft_radio>
+						<strong>How was the player's team draft and/or free agency wise? (<u style="color: blue;">Answer for player's current team</u>)</strong><br>
+						<label class="radio_inline">
+							<input type="radio" name="fadraft_state" id="0fadrft" onclick="changeCheck('0fadrft')">Amazing
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="fadraft_state" id="1fadrft" onclick="changeCheck('1fadrft')" checked>Good
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="fadraft_state" id="2fadrft" onclick="changeCheck('2fadrft')">Decent
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="fadraft_state" id="3fadrft" onclick="changeCheck('3fadrft')">Terrible
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="fadraft_state" id="fadrft_none" checked onclick="changeCheck('fadrft_none')">None selected
+						</label>
+					</div>
+					<input type="submit" onClick = "predictStats()" value="Submit">
+				</form>
+			</div>
+			<h3 style="position: relative; bottom: -30px;"> Current List of Players:</h3>
+			<ol id="second">
+				<li id ="first">Donovan</li>
+				<li class = "segundo">Carlisle</li>
+				<li class = "segundo">Randy</li>
+			</ol>
+			<div id="playerSelect">
+				<strong>Select a player: </strong>
+				<select id="selector">
+					<option>None selected</option>
+				</select>
+			</div>
+			<div id="userPass">
+				<div id="userContainer">
+					<label for="entersomething">Enter Something Below</label>
+					<input type="text" id="entersomething" name="entersomething" required>
+				</div>
+				<div id="passcodeContainer">
+					<label for="passcode" id="passw">Try to Guess the Password!</label>
+					<input type= "password" id="pass" name="password" minlength = "10" required>
+					<!-- To inform the user if their passcode was correct upon submitting, write in the function
+					as the value of the property onclick-->
+					<input type="submit" onclick = "passexperiment()" value="Check!">
+					<script src="node_modules/axios/dist/axios.min.js"></script>
+					<script src="spredictor.js"></script>
+				</div>
+			</div>
+		</div>
+
+		<div id="Fball" class="firstclass">
+			<h1>Sports Predictor (Football)</h1>
+			<div id="tabs-open">
+				<button class="tablist" onClick="openTab(event, 'About')">About</button>
+				<button class="tablist" onClick="openTab(event, 'Select')">Select a Player</button>
+				<button class="tablist" onClick="openTab(event, 'How')">How It's Done</button>
+			</div>
+			<strong><u>Nothing to see yet!</u></strong>
+		</div>
+    </body>
+</html>
