@@ -195,12 +195,10 @@
 		background-image: url(https://www.desktopbackground.org/p/2011/08/11/248597_pictures-basketball-court-backgrounds_960x600_h.gif);
 		background-color: orange;
 		color: whitesmoke;
-		width: 100%;
 	}
 	#Fball h1{
 		background-image: url(https://cdn.pngsumo.com/pitch-soccer-field-background-green-football-field-background-image-green-grass-football-in-grass-png-390_260.png);
 		color: whitesmoke;
-		width: 100%;
 	}
 	#selectplayer{
 		display:none;
@@ -210,14 +208,11 @@
 	#selectplayer2{
 		display:none;
 		position: relative;
-		bottom: -20px;
+		top: 10px;
 	}
 	#healthy_radio{
 		display:inline-block;
 		width: auto;
-		border-color: purple;
-		border-radius: 15px;
-		border-style:double;
 	}
 	.method_list{
 		width:200px;
@@ -230,12 +225,11 @@
 	.display_future_stats{
 		display: none;
 		width: auto;
-		position: absolute;
-		right: 300px;
-		top: 1150px;
-		/* border-radius: 20px;
+		position:absolute; 
+		bottom:175px;
+		left:550px;
 		border-style: groove;
-		border-color: olivedrab;  */
+		border-color: olivedrab;
 	}
 	.fade-in {
 	animation: fadeIn ease 4s;
@@ -288,6 +282,7 @@
 		opacity:1;
 		}
 	}
+	}
 	.fade-out {
 	animation: fadeOut ease 8s;
 	-webkit-animation: fadeOut ease 8s;
@@ -338,7 +333,7 @@
 	100% {
 		opacity:0;
 	}
-}
+	}	
 </style>
     <head>
         <title>
@@ -398,97 +393,21 @@
 					<button class="method_list" onclick="openMethod('longer')"><strong style="color: green;">(Recommended)</strong><p><strong><u> Longer method</u></strong>: requires a lot more information to be 
 					entered manually but may produce quicker and more accurate results</p></button>
 				</div>
-				<iframe id = "firstgif" src="https://giphy.com/embed/cncZ8WkMGM1aY2FuAS" width="400" height="350" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/nba-utah-jazz-donovan-spida-cncZ8WkMGM1aY2FuAS">via GIPHY</a></p>
 				<div class="display_future_stats fade-in" id="fade_in_stats">
 					<strong style="font-size: large; color:blue">Prediction successful, please check the list below</strong>
 				</div>
 				<div class = "display_future_stats fade-out" id="fade_out_stats">
 					<strong style="font-size: large; color:blue">Prediction successful, please check the list below</strong>
 				</div>
+				<div style="width:100%;height:0;padding-bottom:56%;position:absolute; top: 225px; left: 20px;"><iframe id = "firstgif" src="https://giphy.com/embed/cncZ8WkMGM1aY2FuAS" width="350" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+				<div style="width:100%;height:0;padding-bottom:56%;position:absolute; top:125px; right:-1150px;"><iframe src="https://giphy.com/embed/YPmboWXqTVY2MSPyqa" width="350" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+				<div style="width:100%;height:0;padding-bottom:56%;position:absolute; right:-40px; bottom: -400px;"><iframe src="https://giphy.com/embed/cYRsWtMQx1R9MyFqeE" width="350" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+				<div style="width:100%;height:0;padding-bottom:56%;position:absolute;bottom: -400px; right: -1150px;"><iframe src="https://giphy.com/embed/WojMl3T7QfdXGbWtQW" width="350" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
 			</div>
 			<div id="selectplayer">
-				<label for="chooseplayer"> Enter Player Name, Age, and Team Abbreviation (Comma Separated)</label>
-				<input type=text id="chooseplayer" name="chooseplayer" required><br>
-				<strong>How injured was this player's team last season?</strong>
-				<strong>(<u style="color: blue;">Answer for player's current team</u>)</strong><br>
-				<div id=healthy_radio>
-					<label class="radio_inline">
-						<input type="radio" name="injury_state" id="0health" onclick="changeCheck('0health')">All Healthy
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="injury_state" id="1health" onclick="changeCheck('1health')">Mostly Healthy
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="injury_state" id="2health" onclick="changeCheck('2health')">Sometimes/Fairly Healthy
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="injury_state" id="3health" onclick="changeCheck('3health')">Rarely Healthy
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="injury_state" id="none_health" checked onclick="changeCheck('none_health')">None Selected
-					</label>
-				</div><br>
-				<div id=role_radio>
-					<strong>What is this player's role/ability?</strong><br>
-					<label class="radio_inline">
-						<input type="radio" name="player_state" id="0star" onclick="changeCheck('0star')" value="Superstar">Superstar
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="player_state" id="1star" onclick="changeCheck('1star')" value="Star">Star
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="player_state" id="2star" onclick="changeCheck('2star')" value="All Star">All Star
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="player_state" id="3role"  onclick="changeCheck('3role')" value="Role Player">Role Player
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="player_state" id="4reserve"  onclick="changeCheck('4reserve')" value="Reserve">Reserve
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="player_state" id="none_role" checked onclick="changeCheck('none_role')">None selected
-					</label>
-				</div>
-				<div id=fadraft_radio>
-					<strong>How was the player's team draft and/or free agency wise? (<u style="color: blue;">Answer for player's current team</u>)</strong><br>
-					<label class="radio_inline">
-						<input type="radio" name="fadraft_state" id="0fadrft" onclick="changeCheck('0fadrft')">Amazing
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="fadraft_state" id="1fadrft" onclick="changeCheck('1fadrft')" checked>Good
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="fadraft_state" id="2fadrft" onclick="changeCheck('2fadrft')">Decent
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="fadraft_state" id="3fadrft" onclick="changeCheck('3fadrft')">Terrible
-					</label>
-					<label class="radio_inline">
-						<input type="radio" name="fadraft_state" id="fadrft_none" checked onclick="changeCheck('fadrft_none')">None selected
-					</label>
-				</div>
-				<input type="submit" onclick="fetchFutureStats()" value="Submit">
-			</div>
-			<div id="selectplayer2">
-				<form id="primaryform" onsubmit="return false">
-					<label for="entername">Enter the player's full name</label>
-					<input type="text" class = "form" id="entername"><br>
-					<label for="enterage">Enter the player's age</label>
-					<input type="text" class = "form" id="enterage"><br>
-					<label for="gp">Enter games played (gp)</label>
-					<input type="text" class = "form" id="gp"><br>
-					<label for="enterteam">Enter the player's team (as abbreviation)</label>
-					<input type="text" class = "form" id="enterteam"><br>
-					<label for="enterppg">Enter the player's points per game(ppg)</label>
-					<input type="text" class = "form" id="enterppg"><br>
-					<label for="enterrpg">Enter the player's rebounds per game(rpg)</label>
-					<input type="text" class = "form" id="enterrpg"><br>
-					<label for="enterapg">Enter the player's assists per game(apg)</label>
-					<input type="text" class = "form" id="enterapg"><br>
-					<label for="enterspg">Enter the player's steals per game(spg)</label>
-					<input type="text" class = "form" id="enterspg"><br>
-					<label for="enterbpg">Enter the player's blocks per game(bpg)</label>
-					<input type="text" class = "form" id="enterbpg"><br>
+				<form id="shorter-form" onsubmit="return false">
+					<label for="chooseplayer"> Enter Player Name, Age, and Team Abbreviation (Comma Separated)</label>
+					<input type=text id="chooseplayer" name="chooseplayer" required><br>
 					<strong>How injured was this player's team last season?</strong>
 					<strong>(<u style="color: blue;">Answer for player's current team</u>)</strong><br>
 					<div id=healthy_radio>
@@ -547,22 +466,102 @@
 							<input type="radio" name="fadraft_state" id="fadrft_none" checked onclick="changeCheck('fadrft_none')">None selected
 						</label>
 					</div>
+					<input type="submit" onclick="fetchFutureStats()" value="Submit">
+				</form>
+			</div>
+			<div id="selectplayer2">
+				<form id="primaryform" onsubmit="return false">
+					<label for="entername">Enter the player's full name</label>
+					<input type="text" class = "form" id="entername"><br>
+					<label for="enterage">Enter the player's age</label>
+					<input type="text" class = "form" id="enterage"><br>
+					<label for="gp">Enter games played (gp)</label>
+					<input type="text" class = "form" id="gp"><br>
+					<label for="enterteam">Enter the player's team (as abbreviation)</label>
+					<input type="text" class = "form" id="enterteam"><br>
+					<label for="enterppg">Enter the player's points per game(ppg)</label>
+					<input type="text" class = "form" id="enterppg"><br>
+					<label for="enterrpg">Enter the player's rebounds per game(rpg)</label>
+					<input type="text" class = "form" id="enterrpg"><br>
+					<label for="enterapg">Enter the player's assists per game(apg)</label>
+					<input type="text" class = "form" id="enterapg"><br>
+					<label for="enterspg">Enter the player's steals per game(spg)</label>
+					<input type="text" class = "form" id="enterspg"><br>
+					<label for="enterbpg">Enter the player's blocks per game(bpg)</label>
+					<input type="text" class = "form" id="enterbpg"><br>
+					<strong>How injured was this player's team last season?</strong>
+					<strong>(<u style="color: blue;">Answer for player's current team</u>)</strong><br>
+					<div id=healthy_radio class="radio-buttons">
+						<label class="radio_inline">
+							<input type="radio" name="injury_state" id="0health" onclick="changeCheck('0health')">All Healthy
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="injury_state" id="1health" onclick="changeCheck('1health')">Mostly Healthy
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="injury_state" id="2health" onclick="changeCheck('2health')">Sometimes/Fairly Healthy
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="injury_state" id="3health" onclick="changeCheck('3health')">Rarely Healthy
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="injury_state" id="none_health" checked onclick="changeCheck('none_health')">None Selected
+						</label>
+					</div><br>
+					<div id=role_radio class="radio-buttons">
+						<strong>What is this player's role/ability?</strong><br>
+						<label class="radio_inline">
+							<input type="radio" name="player_state" id="0star" onclick="changeCheck('0star')" value="Superstar">Superstar
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="player_state" id="1star" onclick="changeCheck('1star')" value="Star">Star
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="player_state" id="2star" onclick="changeCheck('2star')" value="All Star">All Star
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="player_state" id="3role"  onclick="changeCheck('3role')" value="Role Player">Role Player
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="player_state" id="4reserve"  onclick="changeCheck('4reserve')" value="Reserve">Reserve
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="player_state" id="none_role" checked onclick="changeCheck('none_role')">None selected
+						</label>
+					</div>
+					<div id=fadraft_radio class="radio-buttons">
+						<strong>How was the player's team draft and/or free agency wise? (<u style="color: blue;">Answer for player's current team</u>)</strong><br>
+						<label class="radio_inline">
+							<input type="radio" name="fadraft_state" id="0fadrft" onclick="changeCheck('0fadrft')">Amazing
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="fadraft_state" id="1fadrft" onclick="changeCheck('1fadrft')" checked>Good
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="fadraft_state" id="2fadrft" onclick="changeCheck('2fadrft')">Decent
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="fadraft_state" id="3fadrft" onclick="changeCheck('3fadrft')">Terrible
+						</label>
+						<label class="radio_inline">
+							<input type="radio" name="fadraft_state" id="fadrft_none" checked onclick="changeCheck('fadrft_none')">None selected
+						</label>
+					</div>
 					<input type="submit" onClick = "predictStats()" value="Submit">
 				</form>
 			</div>
-			<h3 style="position: relative; bottom: -30px;"> Current List of Players:</h3>
-			<ol id="second">
-				<li id ="first">Donovan</li>
-				<li class = "segundo">Carlisle</li>
-				<li class = "segundo">Randy</li>
-			</ol>
-			<div id="playerSelect">
-				<strong>Select a player: </strong>
-				<select id="selector">
-					<option>None selected</option>
-				</select>
+			<div style="position: absolute; bottom: -380px">
+				<h3> Current List of Players:</h3>
+				<ol id="second">
+				</ol>
+				<div id="playerSelect">
+					<strong>Select a player: </strong>
+					<select id="selector">
+						<option>None selected</option>
+					</select>
+				</div>
 			</div>
-			<div id="userPass">
+			<div id="userPass" style = "position: relative; bottom: -900px;">
 				<div id="userContainer">
 					<label for="entersomething">Enter Something Below</label>
 					<input type="text" id="entersomething" name="entersomething" required>

@@ -448,7 +448,6 @@ function getRandomColor() {
     }
     return color;
   }
-newfunct('Moss'); 
 displayPlayers();
 retrieveTeams();
 createIPGraph();
