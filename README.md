@@ -3,7 +3,7 @@
 This is a website focused on determining a player's future statistics. 
 Currently available for basketball but meant to be a tool for football as well.
 
-<img src="http://g.recordit.co/gfhvDVb60J.gif"/>
+<img src="http://g.recordit.co/43pJz5tuRv.gif"/>
 
 ## Factors
 The following were used to determine which way a player's statistics point (increase, no change, or decrease).
