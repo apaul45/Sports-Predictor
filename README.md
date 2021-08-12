@@ -11,7 +11,7 @@ The following were used to determine which way a player's statistics point (incr
 - Health
 - Player Role & Team State (Standing & Health)
 
-The resulting score is taken and applied proptionately to each of the common statistics.
+The resulting score is taken and applied proportionately to each of the common statistics.
 
 ## APIs used
 The following APIs were used in the basketball portion of this website:
