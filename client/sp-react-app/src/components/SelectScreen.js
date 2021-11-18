@@ -3,16 +3,16 @@
     only has option for basketball currently)
 */
 import { Link } from "react-router-dom";
-export default function SelectScreem(){
+export default function SelectScreen(){
     return(
         <>
-            <button id="bball" className = "currentSports">
-                <Link to="/bball/">
-                    <div id = "bballContainer">
-                        <strong>Basketball</strong>
-                    </div>
-                </Link>
-            </button>
+            <Link to="/bball/">
+                <button id="bball" className = "currentSports">
+                        <div id = "bballContainer">
+                            <strong>Basketball</strong>
+                        </div>
+                </button>
+            </Link>
         </>
     )
 }
