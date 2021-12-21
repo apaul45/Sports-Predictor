@@ -1,10 +1,15 @@
-import * as React from 'react';
+/*
+  This component is used to display the name of the app 
+  and the nav bar going to each screen 
+*/
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 
 export default function HomeWrapper(){
     const navigate = useNavigate();
+    const leftPic = "https://www.pngall.com/wp-content/uploads/2016/03/Basketball-PNG-Clipart.png";
+    const rightPic = "https://images.vexels.com/media/users/3/202468/isolated/preview/43b5df3eae6ba10e91532d4402b692a4-american-football-ball-flat-icon-by-vexels.png";
 
     const StyledButton = styled(Button)({
         boxShadow: 'none',
@@ -33,6 +38,7 @@ export default function HomeWrapper(){
         },
     });
 
+
     //Set up HomeWrapper to contain the top title bar and nav bar with buttons going to each page
     return(
         <div id= "Select"> 
@@ -58,11 +64,11 @@ export default function HomeWrapper(){
 								How It's Done
 							</StyledButton>
 
-							<img src="https://images.vexels.com/media/users/3/202468/isolated/preview/43b5df3eae6ba10e91532d4402b692a4-american-football-ball-flat-icon-by-vexels.png"
+							<img src={rightPic}
 							width="110" height="110" id='footballImg'>
 							</img>
 
-							<img src="https://www.pngall.com/wp-content/uploads/2016/03/Basketball-PNG-Clipart.png"
+							<img src={leftPic}
 							width="110" height="110" id='bballImg'>
 							</img>
 

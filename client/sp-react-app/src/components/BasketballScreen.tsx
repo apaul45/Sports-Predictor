@@ -1,81 +1,15 @@
 import { useContext, useState } from 'react'
 import { GlobalStoreContext} from '../store'
-import * as React from 'react';
 import Button from '@mui/material/Button';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 export default function BasketballScreen(){
     //The state variable below will be updated everytime a prediction is made
     const [method, setMethod] = useState("");
 
-    //The arrays below are used to create the radio buttons
-    const playerRoleArray = ["Superstar", "Star", "All Star", "Role Player"];
-    const teamStateArray = ["All Healthy", "Mostly Healthy", "Sometimes Healthy", "Rarely Healthy"];
-    const futureStateArray = ["Amazing", "Good", "Decent", "Terrible"];
 
-    //Radio forms is used in both methods, so make it a variable that can be added to jsx of either elements
-    function changeCheck(this: any, param : string){
-        console.log(param);
-    }
+    const navigate = useNavigate();
 
-    //Both the shorter and longer method contain the radio buttons below
-    const radioForms = 
-                <>
-                    <FormLabel component="legend">
-                        <strong>How injured was this player's team last season?</strong> 
-                    </FormLabel>
-                    <RadioGroup
-                        row aria-label="healthy_radio"
-                        defaultValue="Sometimes Healthy"
-                        name="radio-buttons-group"
-                    >
-                        {
-                            teamStateArray.map((role:string, index:number)=>
-                                <FormControlLabel value={role} name="injury_state" 
-                                onClick={()=>changeCheck(index+"health")}
-                                control={<Radio />} label={role}/>
-                            )
-                        }
-                    </RadioGroup><br/>
-
-                    <FormLabel component="legend">
-                        <strong>What is this player's role/ability?</strong>
-                    </FormLabel>
-                    <RadioGroup
-                        row aria-label="role_radio"
-                        defaultValue="Role Player"
-                        name="radio-buttons-group"
-                    >
-                        {
-                            playerRoleArray.map((role, index)=>
-                                <FormControlLabel value={role} name="player_state" 
-                                onClick={()=>changeCheck(index+"star")}
-                                control={<Radio />} label={role}/>
-                            )
-                        }
-                    </RadioGroup><br/>
-
-                    <FormLabel component="legend">
-                        <strong>How was the player's team draft and/or free agency wise? </strong>
-                    </FormLabel>
-                    <RadioGroup
-                        row aria-label="fadraft_radio"
-                        defaultValue="Decent"
-                        name="radio-buttons-group"
-                    >
-                        {
-                            futureStateArray.map((role, index)=>
-                            <FormControlLabel value={role} name="fadraft_state" 
-                            onClick={()=>changeCheck(index+"fadrft")}
-                            control={<Radio />} label={role}/>
-                            )
-                        }
-                    </RadioGroup>
-                </>;
 
     
     const BootstrapButton = styled(Button)({
@@ -86,7 +20,7 @@ export default function BasketballScreen(){
         lineHeight: 1.5,
         backgroundColor: 'white',
         color:"black",
-        width:"55%",
+        width:"30%",
         borderColor: '#0063cc',
         '&:hover': {
           backgroundColor: 'black',
@@ -104,8 +38,37 @@ export default function BasketballScreen(){
         },
       });
 
-
     
+
+    /* clickHandler identifies which event was clicked on, and 
+    goes to the appropriate screen */
+    const clickHandler = (event: any)=>{
+        console.log(event.target.id);
+        switch(event.target.id){
+            case("make-prediction"):{
+                navigate("/bball/make-prediction");
+                break;
+            }
+            case('view-predictions'):{
+                break;
+            }
+            case('view-your-predictions'):{
+                break;
+            }
+        }
+    }
+    
+    /*
+        For every screen in the app, the screen-style css class
+        is what gives each screen the same style (that is, the 
+        style of the app).
+
+        In order for this style to not interfere with the styling
+        of elements in the screen itself, a outer div with the 
+        child-screen-style class is required to override the properties 
+        that should be exclusive to screen-style (padding)
+    */
+
     return(
         <div id= "basketball-screen" className='screen-style'>
             <div className='child-screen-style'>
@@ -117,15 +80,25 @@ export default function BasketballScreen(){
 
                 <div className="centering">
                     <BootstrapButton variant="contained" className="Button" 
-                    id="shorter">
+                    id="make-prediction"
+                    onClick={(event) => clickHandler(event)}>
                         Make a prediction
                     </BootstrapButton>
                 </div><br/>
 
                 <div className="centering">
                     <BootstrapButton variant="contained" className="Button" 
-                    id="shorter">
+                    id="view-predictions"
+                    onClick={(event) => clickHandler(event)}>
                         View all predictions
+                    </BootstrapButton>
+                </div><br/>
+
+                <div className="centering">
+                    <BootstrapButton variant="contained" className="Button" 
+                    id="view-user-predictions"
+                    onClick={(event) => clickHandler(event)}>
+                        View your predictions
                     </BootstrapButton>
                 </div>
             </div>

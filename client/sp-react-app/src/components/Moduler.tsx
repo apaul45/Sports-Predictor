@@ -8,11 +8,12 @@ import BasketballScreen from "./BasketballScreen";
 import HomeWrapper from "./HomeWrapper";
 import MethodScreen from "./MethodScreen";
 import SelectScreen from "./SelectScreen";
-
+import PredictionScreen from "./PredictionScreen";
 export{
     AboutScreen,
     BasketballScreen,
     HomeWrapper,
     MethodScreen,
-    SelectScreen
+    SelectScreen,
+    PredictionScreen
 }

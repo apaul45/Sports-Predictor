@@ -7,18 +7,21 @@ import MethodScreen from './components/MethodScreen';
 import SelectScreen from './components/SelectScreen';
 import AboutScreen from './components/AboutScreen';
 import HomeWrapper from './components/HomeWrapper';
+import PredictionScreen from './components/PredictionScreen';
 function App() {
   return (
     <BrowserRouter>
       <GlobalStoreContextProvider>
       <HomeWrapper/>
       <Routes>
-        {/* Provide the global store to all components by wrapping the provider around them */}
+        {/* Provide the global store to all components 
+        by wrapping the provider around them */}
         
           <Route path="/about/" element={<AboutScreen/>}></Route>
           <Route path="/how_done/" element={<MethodScreen/>}></Route>
           <Route path="/select/" element={<SelectScreen/>}></Route>
           <Route path="/bball/" element={<BasketBallScreen/>}></Route>
+          <Route path="/bball/make-prediction" element={<PredictionScreen/>}></Route>
       </Routes>
       </GlobalStoreContextProvider>
     </BrowserRouter>
