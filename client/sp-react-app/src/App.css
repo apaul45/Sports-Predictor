@@ -1,27 +1,38 @@
-div{
-  font-family: 'Qahiri', sans-serif;
-}
-h1{
-  background-image: url(https://www.hdwallpaper.nu/wp-content/uploads/2017/03/grey-1.jpg);
+@import url('https://fonts.googleapis.com/css2?family=Actor&display=swap');
+
+/*
+ The * selector can be used to apply a single style to EVERY ELEMENT in the app
+*/
+/* *{
+  font-family: 'Actor', sans-serif;
+} */
+#Select{
+  background-color: black;
   background-size: 100% 100%;
-color: black;
-padding: 20px;
+  line-height: 50%;
+  color: white;
+  padding: 10px;
   text-align: center;
   position: relative;
-  top: -30px;
+  top: 2%;
+  font-family: 'Actor', sans-serif;
+}
+#Select h1{
+  font-size: 220%;
+  font-weight: 10;
 }
 ol, .segundo{
   color: blueviolet;
   margin-top: 50px;
-font-family: "Courier New", Courier, monospace;
-font-size: 18px;
-letter-spacing: 2px;
-word-spacing: 0px;
-font-weight: 700;
-text-decoration: none;
-font-style: normal;
-font-variant: normal;
-text-transform: none;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  letter-spacing: 2px;
+  word-spacing: 0px;
+  font-weight: 700;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
 }
 .segundo{
   text-align: left;
@@ -29,9 +40,9 @@ text-transform: none;
 ol{
   border-radius: 10px;
   border-style: dotted; 
-/* Need the 2 lines below to make the border resize to fit text */
-display: inline-block;
-width: auto;
+  /* Need the 2 lines below to make the border resize to fit text */
+  display: inline-block;
+  width: auto;
 }
 #passcodeContainer{
   float: right;
@@ -41,12 +52,6 @@ width: auto;
 }
 /* To center an image, have to set horz margins to auto and set as a block
 */
-#drose-lol{
-  display:block;
-  margin-left: auto;
-  margin-right: auto;
-  width:50%;
-}
 button:hover.tablist{
   background-color: blue;
   color: white;
@@ -55,53 +60,56 @@ button:active.tablist{
   background-color: green;
   color:beige;
 }
+.Button:hover{
+  background-color: aliceblue;
+}
 button:hover#fball{
-animation-name: ball;
-animation-duration: 1s;
-animation-fill-mode: forwards;
+  animation-name: ball;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
 button:active#fball{
-background-image: url(https://i.kym-cdn.com/entries/icons/original/000/023/815/rodgers.jpg);
-background-size: 100% 100%;
+  background-image: url(https://i.kym-cdn.com/entries/icons/original/000/023/815/rodgers.jpg);
+  background-size: 100% 100%;
 }
 @keyframes ball{
-0%{
-transform: scale(0.3);
-}
-50%{
-border-width:10px;
-border-color: red;
-}
-100%{
-border-width: 30px;
-/*border-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/0b604440383369.577d39ee68674.jpg) 100 stretch;*/
-border-image: url(https://www.uidownload.com/files/766/762/374/nfl-team-vector-logos.jpg) 100 stretch;
-}
+  0%{
+  transform: scale(0.3);
+  }
+  50%{
+  border-width:10px;
+  border-color: red;
+  }
+  100%{
+  border-width: 30px;
+  /*border-image: url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/0b604440383369.577d39ee68674.jpg) 100 stretch;*/
+  border-image: url(https://www.uidownload.com/files/766/762/374/nfl-team-vector-logos.jpg) 100 stretch;
+  }
 }
 button:hover#bball{
-animation: ball2;
-animation-duration: 1s;
-animation-fill-mode: forwards;
+  animation: ball2;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
 button:active#bball{
-background-image: url(https://4.bp.blogspot.com/-ygULFqBksYM/UWbr9ZmFOlI/AAAAAAAARfA/Xi-cHwIFz50/s1600/lebron-james-ugly-funny-annoying-face-sucks-player-nba-funny-meme-jokes-photos-2013.jpg);
-background-size: 100%;
+  background-image: url(https://4.bp.blogspot.com/-ygULFqBksYM/UWbr9ZmFOlI/AAAAAAAARfA/Xi-cHwIFz50/s1600/lebron-james-ugly-funny-annoying-face-sucks-player-nba-funny-meme-jokes-photos-2013.jpg);
+  background-size: 100%;
 }
 @keyframes ball2{
-0%{
-transform: scale(0.3);
-border-radius: 12px;
-}
-50%{
-border-width:10px;
-border-color: blye;
-border-radius: 12px;
-}
-100%{
-border-width: 30px;
-border-image: url(https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX17637887.jpg) 100 stretch;
-border-radius: 12px;
-}
+  0%{
+  transform: scale(0.3);
+  border-radius: 12px;
+  }
+  50%{
+  border-width:10px;
+  border-color: blye;
+  border-radius: 12px;
+  }
+  100%{
+  border-width: 30px;
+  border-image: url(https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX17637887.jpg) 100 stretch;
+  border-radius: 12px;
+  }
 }
 #userPass{
   line-height: 10em;
@@ -112,120 +120,148 @@ border-radius: 12px;
 /* To center a tab (aka buttons), can use flexbox on the container 
 containing the buttons, aka the surrounding div element */
 #tabs-open{
-  padding: 8px 8px 8px 8px;
-  position: relative;
-  top: -55px;
-  background-image: url(https://ak.picdn.net/shutterstock/videos/14063324/thumb/2.jpg);
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+/*
+  footballImg is the styling for the football picture appearing in the home wrapper
+*/
+#footballImg{
+  position:absolute;
+  right: -1%;
+  top:8%;
+}
+#bballImg{
+  position:absolute;
+  left: 0%;
+  top:8%;
+}
+#choose2{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#choose2{
-display: flex;
-justify-content: center;
-align-items: center;
+/*
+  To add a border around a screen, specify the border left, right and bottom, 
+  and then adjust the padding so it extends beyond the screen
+*/
+.screen-style{
+  width: auto;
+  height: auto;
+  border-right: 15px;
+  border-left: 15px;
+  border-bottom: 15px;
+  border-color: black;
+  padding-bottom: 100%;
+  border-style: solid;
+  background-color: #CBE0F5;
 }
-body{
-  /*background-image: url(http://wallpoper.com/images/00/44/93/89/light-background_00449389.jpg);*/
-/*background-image: url(https://img.wallpapersafari.com/desktop/1920/1080/45/60/iMb85R.jpg);*/
-/*background-image: url(https://images.alphacoders.com/812/81223.jpg);*/
-/*background-color: #f5efef;*/
-background-image: url(https://st4.depositphotos.com/32273002/40701/i/950/depositphotos_407019050-stock-photo-white-light-texture-background-copy.jpg);
-width: auto;
+.child-screen-style{
+  padding: 0%;
+  border: 0px;
 }
 .tabs-closed{
   display: none;
 }
-#Select.firstclass{
-  display: block;
-}
 .firstclass{
-display:none;
+  display:none;
 }
 .currentSports{
-width:550px;
-height: 400px;
-position: relative;
-bottom: -100px;
+  width:550px;
+  height: 400px;
+  position: relative;
+  bottom: -100px;
 }
 #firstgif{
-position: relative;
-top: -100px;
-right: -20px;
+  position: relative;
+  top: -100px;
+  right: -20px;
 }
 #bball{
-float: left;
-position:relative;
-right: -170px;
-background-image: url(https://d.newsweek.com/en/full/836813/lebron-james.jpg);
-background-size: 100% 100%;
-border-radius: 12px;
+  float: left;
+  position:relative;
+  right: -170px;
+  background-image: url(https://d.newsweek.com/en/full/836813/lebron-james.jpg);
+  background-size: 100% 100%;
+  border-radius: 12px;
 }
 
 #bballContainer{
-font-family:'Courier New', Courier, monospace;
-color:aliceblue;
-font-size: 30px;
-position: relative;
-top: -150px;
-left: -150px;
+  font-family:'Courier New', Courier, monospace;
+  color:aliceblue;
+  font-size: 30px;
+  position: relative;
+  top: -150px;
+  left: -150px;
 }
 #fball{
-float: right;
-position: relative;
-left: -230px;
-background-image: url(https://www.masslive.com/resizer/u1AM7t4evElfZFI3XFU9WqP7T1o=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/CAWM55Z4SNFNFOWTQYTYHXIP4I.jpg);
-background-size: 100% 100%;
-border-radius: 12px;
+  float: right;
+  position: relative;
+  left: -230px;
+  background-image: url(https://www.masslive.com/resizer/u1AM7t4evElfZFI3XFU9WqP7T1o=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/CAWM55Z4SNFNFOWTQYTYHXIP4I.jpg);
+  background-size: 100% 100%;
+  border-radius: 12px;
 }
 #fballContainer{
-font-family:'Courier New', Courier, monospace;
-color:aliceblue;
-font-size: 30px;
-position: relative;
-top: -150px;
-left: 175px;
+  font-family:'Courier New', Courier, monospace;
+  color:aliceblue;
+  font-size: 30px;
+  position: relative;
+  top: -150px;
+  left: 175px;
 }
 #Bball h1{
-background-image: url(https://www.desktopbackground.org/p/2011/08/11/248597_pictures-basketball-court-backgrounds_960x600_h.gif);
-background-color: orange;
-color: whitesmoke;
+  background-image: url(https://www.desktopbackground.org/p/2011/08/11/248597_pictures-basketball-court-backgrounds_960x600_h.gif);
+  background-color: orange;
+  color: whitesmoke;
 }
 #Fball h1{
-background-image: url(https://cdn.pngsumo.com/pitch-soccer-field-background-green-football-field-background-image-green-grass-football-in-grass-png-390_260.png);
-color: whitesmoke;
+  background-image: url(https://cdn.pngsumo.com/pitch-soccer-field-background-green-football-field-background-image-green-grass-football-in-grass-png-390_260.png);
+  color: whitesmoke;
 }
 #selectplayer{
-display:none;
-position: relative;
-bottom: -20px;
+  display:none;
+  position: relative;
+  bottom: -20px;
 }
 #selectplayer2{
-display:none;
-position: relative;
-top: 10px;
+  display:none;
+  position: relative;
+  top: 10px;
 }
 #healthy_radio{
-display:inline-block;
-width: auto;
+  display:inline-block;
+  width: auto;
 }
 .method_list{
-width:200px;
-height:120px;
+  width:200px;
+  height:120px;
 }
 .form{
-position: absolute;
-right: 420px;
+  position: absolute;
+  right: 420px;
 }
 .display_future_stats{
-display: none;
-width: auto;
-position:absolute; 
-bottom:175px;
-left:550px;
-border-style: groove;
-border-color: olivedrab;
+  display: none;
+  width: auto;
+  position:absolute; 
+  bottom:175px;
+  left:550px;
+  border-style: groove;
+  border-color: olivedrab;
 }
+/*
+  The class below will be used whenever
+  something has to be centered
+*/
+.centering{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Code below handles fading in and out */
 .fade-in {
 animation: fadeIn ease 4s;
 -webkit-animation: fadeIn ease 6s;
@@ -233,98 +269,111 @@ animation: fadeIn ease 4s;
 -o-animation: fadeIn ease 6s;
 -ms-animation: fadeIn ease 6s;
 }
+
+/*
+  To apply a style to EVERYTHING inside a container (ie, apply 
+  a single font), have to declare the selector and follow with 
+  "*", which is the universal selector
+
+#basketball-screen *{
+  font-family: 'Actor', sans-serif;
+}
+*/
+#basketball-screen{
+  font-family: 'Actor', sans-serif;
+}
 @keyframes fadeIn {
-0% {
-opacity:0;
-}
-100% {
-opacity:1;
-}
+  0% {
+  opacity:0;
+  }
+  100% {
+  opacity:1;
+  }
 }
 
 @-moz-keyframes fadeIn {
-0% {
-opacity:0;
-}
-100% {
-opacity:1;
-}
+  0% {
+  opacity:0;
+  }
+  100% {
+  opacity:1;
+  }
 }
 
 @-webkit-keyframes fadeIn {
-0% {
-opacity:0;
-}
-100% {
-opacity:1;
-}
+  0% {
+  opacity:0;
+  }
+  100% {
+  opacity:1;
+  }
 }
 
 @-o-keyframes fadeIn {
-0% {
-opacity:0;
-}
-100% {
-opacity:1;
-}
+  0% {
+  opacity:0;
+  }
+  100% {
+  opacity:1;
+  }
 }
 
 @-ms-keyframes fadeIn {
-0% {
-opacity:0;
-}
-100% {
-opacity:1;
-}
+  0% {
+  opacity:0;
+  }
+  100% {
+  opacity:1;
+  }
 }
 .fade-out {
-animation: fadeOut ease 8s;
--webkit-animation: fadeOut ease 8s;
--moz-animation: fadeOut ease 8s;
--o-animation: fadeOut ease 8s;
--ms-animation: fadeOut ease 8s;
+  animation: fadeOut ease 8s;
+  -webkit-animation: fadeOut ease 8s;
+  -moz-animation: fadeOut ease 8s;
+  -o-animation: fadeOut ease 8s;
+  -ms-animation: fadeOut ease 8s;
 }
 @keyframes fadeOut {
-0% {
-opacity:1;
-}
-100% {
-opacity:0;
-}
+  0% {
+  opacity:1;
+  }
+  100% {
+  opacity:0;
+  }
 }
 
 @-moz-keyframes fadeOut {
-0% {
-opacity:1;
-}
-100% {
-opacity:0;
-}
+  0% {
+  opacity:1;
+  }
+  100% {
+  opacity:0;
+  }
 }
 
 @-webkit-keyframes fadeOut {
-0% {
-opacity:1;
-}
-100% {
-opacity:0;
-}
+  0% {
+  opacity:1;
+  }
+  100% {
+  opacity:0;
+  }
 }
 
 @-o-keyframes fadeOut {
-0% {
-opacity:1;
-}
-100% {
-opacity:0;
-}
+  0% {
+  opacity:1;
+  }
+  100% {
+  opacity:0;
+  }
 }
 
 @-ms-keyframes fadeOut {
-0% {
-opacity:1;
-}
-100% {
-opacity:0;
-}
+  0% {
+  opacity:1;
+  }
+  100% {
+  opacity:0;
+  }
 }	

@@ -15,10 +15,10 @@ function App() {
       <Routes>
         {/* Provide the global store to all components by wrapping the provider around them */}
         
-          <Route exact path="/about/" element={<AboutScreen/>}></Route>
-          <Route exact path="/how_done/" element={<MethodScreen/>}></Route>
-          <Route exact path="/select/" element={<SelectScreen/>}></Route>
-          <Route exact path="/bball/" element={<BasketBallScreen/>}></Route>
+          <Route path="/about/" element={<AboutScreen/>}></Route>
+          <Route path="/how_done/" element={<MethodScreen/>}></Route>
+          <Route path="/select/" element={<SelectScreen/>}></Route>
+          <Route path="/bball/" element={<BasketBallScreen/>}></Route>
       </Routes>
       </GlobalStoreContextProvider>
     </BrowserRouter>

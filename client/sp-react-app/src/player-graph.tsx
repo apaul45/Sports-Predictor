@@ -1,22 +1,24 @@
 export default class playerGraph{
-    constructor(noVertices){
+    adjList: Map<any, any>;
+    noVertices: any;
+    constructor(noVertices:any){
         this.noVertices = noVertices;
         this.adjList = new Map();
     }
     //Add vertices to the adjacency list using the contents of 3 lists that are the same size
-    addVertex(v,w,z){
+    addVertex(v: any[],w: any[],z: any[]){
         this.adjList.set(v[0], []).set(v[1], []).set(v[2], []).set(v[3], []);
         this.adjList.set(w[0], []).set(w[1], []).set(w[2], []).set(w[3], []);
         this.adjList.set(z[0], []).set(z[1], []).set(z[2], []).set(z[3], []);
     }
     //Set edge from v to w with the indicated weightvalue
-    addEdge(v, w, weightValue){
+    addEdge(v: any, w: any, weightValue: any){
         /* Add the directed edge from v to w, with the latter being 
         an array to hold a weight value */
         this.adjList.get(v).push([w,weightValue]);
     }
     //Get the value of the path between the four argument vertices
-    getPathWeight(v,w,y,z){
+    getPathWeight(v: any,w: string | number,y: string | number,z: string | number){
         let totalVal = 0;
         /*First get the starting vertex (playerRole), then the index of the specified team state, and finally 
         the index of the weight within this edge array */
