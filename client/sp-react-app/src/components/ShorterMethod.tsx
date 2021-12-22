@@ -7,10 +7,11 @@
 import { Container, FormControl, Box, Grid, InputLabel, TextField, Button } from "@mui/material";
 import { useState } from "react";
 
-interface RadioButtons{
+interface Props{
     radioButtons : JSX.Element;
+    handleSubmit: Function;
 }
-function ShorterMethod({radioButtons} : RadioButtons){
+function ShorterMethod({radioButtons, handleSubmit} : Props){
     /*
         In TypeScript, an index signature (using a string value to access a value in a 
         object) requires two things in this case. First, the object itself must have
@@ -65,7 +66,7 @@ function ShorterMethod({radioButtons} : RadioButtons){
         <Container component="main">
             <br/>
             <Box component="form" 
-            onClick={()=>console.log(1)}
+            onSubmit={(event: any)=>handleSubmit(event, formObject)}
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -84,7 +85,7 @@ function ShorterMethod({radioButtons} : RadioButtons){
                 </FormControl>
 
                 <br/>
-                
+
                 <Button
                 type="submit"
                 variant="contained"

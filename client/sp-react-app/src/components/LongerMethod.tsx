@@ -1,4 +1,4 @@
-import { Box, Button, Container, FormControl, Grid, Input, InputLabel, TextField } from "@mui/material";
+import { Box, Button, Container, FormControl, Grid, InputLabel, TextField } from "@mui/material";
 import { useState } from "react";
 
 /*
@@ -6,11 +6,12 @@ import { useState } from "react";
     a interface can be defined and then destructured
     to get the necessary props
 */
-interface RadioButtons{
+interface Props{
     radioButtons : JSX.Element;
+    handleSubmit: Function;
 }
 
-function LongerMethod({radioButtons} : RadioButtons){
+function LongerMethod({radioButtons, handleSubmit} : Props){
     /*
         In TypeScript, an index signature (using a string value to access a value in a 
         object) requires two things in this case. First, the object itself must have
@@ -36,7 +37,6 @@ function LongerMethod({radioButtons} : RadioButtons){
     const handleChange = (attribute: string, event:any) => {
         formObject[attribute] = event.target.value;
         setFormObject(formObject);
-        console.log(formObject[attribute])
     }
 
     //Object.entries() can be used to get an array with each keyname pair as an array
@@ -74,7 +74,7 @@ function LongerMethod({radioButtons} : RadioButtons){
     return(
         <Container component="main">
             <Box component="form" 
-            onClick={()=>console.log(1)}
+            onSubmit={(event: any)=>handleSubmit(event, formObject)}
             sx={{
                 display: 'flex',
                 flexDirection: 'column',

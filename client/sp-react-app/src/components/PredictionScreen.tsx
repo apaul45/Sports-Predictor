@@ -102,16 +102,22 @@ export default function PredictionScreen(){
             </RadioGroup>
         </>;
 
+    //Callback function for the submit event of each method forms
+    const handleSubmit = (event: any, formObject: object)=>{
+        event.preventDefault();
+        console.log(formObject);
+    }
+
     const methodHandler = (event: any)=>{
         const methodName = event.target.id;
         if(methodName === "shorter"){
-            setMethod(<ShorterMethod radioButtons={radioForms} />)
+            setMethod(<ShorterMethod radioButtons={radioForms} handleSubmit={handleSubmit}/>)
         }
         else if (methodName === "longer"){
-            setMethod(<LongerMethod radioButtons={radioForms} />);
+            setMethod(<LongerMethod radioButtons={radioForms} handleSubmit={handleSubmit}/>);
         }
     }
-    
+
 
     /*
         For every screen in the app, the screen-style css class
