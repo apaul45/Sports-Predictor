@@ -1,6 +1,11 @@
-import { Box, Button, FormControl, Input, InputLabel, TextField } from "@mui/material";
+import { Box, Button, Container, FormControl, Grid, Input, InputLabel, TextField } from "@mui/material";
 import { useState } from "react";
 
+/*
+    In order to pass in props to a component in typescript, 
+    a interface can be defined and then destructured
+    to get the necessary props
+*/
 interface RadioButtons{
     radioButtons : JSX.Element;
 }
@@ -27,6 +32,7 @@ function LongerMethod({radioButtons} : RadioButtons){
     */
     const [formObject, setFormObject] = useState(initObject);
 
+    //See above explanation on index signatures
     const handleChange = (attribute: string, event:any) => {
         formObject[attribute] = event.target.value;
         setFormObject(formObject);
@@ -35,32 +41,60 @@ function LongerMethod({radioButtons} : RadioButtons){
 
     //Object.entries() can be used to get an array with each keyname pair as an array
     const array = Object.entries(formObject);
+    
+    /* A MUI grid can be used to control how 
+       many inputs are grouped together: the xs (or sm)
+       attribute allows for controlling how much space an
+       item takes up in terms of its width. The max value is 12, 
+       which means an xs of 6 would allow for 6 columns
+       with 2 in each row. 
+
+       In this case, the xs is 3 to allow for 3 columns with 4 items
+       in each row
+    */
     const textfields = array.map(entry => 
-        <>
+        <Grid item xs={3} >
             <InputLabel>
                 Enter the player's {entry[0]}
             </InputLabel>
             <TextField 
-            defaultValue={entry[1]}
+            name={entry[0]}
+            required
+            label={entry[0]}
+            autoFocus
             onChange={(event) => handleChange(entry[0], event)}
-            /><br/>
-        </>
+            />
+        </Grid>
     );
+
+    /*
+        Wrapping the form in a Container component allows for the 
+        form to be centered 
+    */
     return(
-        <div className="centering">
-            <form>
+        <Container component="main">
+            <Box component="form" 
+            onClick={()=>console.log(1)}
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}
+            >
                 <br/>
-                {textfields}
+                <Grid container spacing={2}>
+                    {textfields}
+                </Grid>
                 <FormControl>
                     {radioButtons}
                 </FormControl>
                 <br/>
                 <Button type="submit"
-                onClick={()=>console.log(1)}>
+                variant="contained">
                     Submit
                 </Button>
-            </form>
-        </div>
+            </Box>
+        </Container>
     );
 }
 export default LongerMethod;
