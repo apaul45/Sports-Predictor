@@ -1,35 +1,67 @@
 /*
-    PredictionScreen is the component representing the screen
-    where users can make predictions
+    PredictionScreen is the component handling the choosing of prediction method 
+    and creation of predictions
 */
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
+import { useState } from 'react';
+import ShorterMethod from './ShorterMethod';
+import LongerMethod from './LongerMethod';
+import {PredictionButton} from './StyledButtons';
 export default function PredictionScreen(){
+    /* radioValues is used to update the values checked off
+       for each type of radio button */
+    let radioValues = ["0health","0star","0fadrft"];
 
+    const methodButtons = 
+        <>
+            <div className = "centering">
+                <PredictionButton variant="contained" className="Button" 
+                id="shorter"
+                onClick={(event)=> methodHandler(event)}>
+                    Shorter Method
+                </PredictionButton>
+
+                &nbsp; &nbsp; &nbsp;
+
+                <PredictionButton variant="contained" className="Button" 
+                id="longer"
+                onClick={(event)=> methodHandler(event)}>
+                    Longer Method
+                </PredictionButton>
+            </div>
+            <div id="method-description" className='centering'>
+                Shorter method requires much less inputted information, but 
+                may produce results much slower than the longer method.
+            </div>
+        </>
+
+    /* When the user clicks on a method type, method should be 
+    changed to that method's inputs */
+    const [method, setMethod] = useState(methodButtons);
+    
     //The arrays below are used to create the radio buttons
     const playerRoleArray = ["Superstar", "Star", "All Star", "Role Player"];
     const teamStateArray = ["All Healthy", "Mostly Healthy", "Sometimes Healthy", "Rarely Healthy"];
     const futureStateArray = ["Amazing", "Good", "Decent", "Terrible"];
 
     //Both the shorter and longer method use the radio buttons below
-    const radioForms = 
+    const radioForms:JSX.Element = 
         <>
             <FormLabel component="legend">
                 <strong>How injured was this player's team last season?</strong> 
             </FormLabel>
             <RadioGroup
                 row aria-label="healthy_radio"
-                defaultValue="Sometimes Healthy"
+                defaultValue="All Healthy"
                 name="radio-buttons-group"
             >
                 {
                     teamStateArray.map((role:string, index:number)=>
                         <FormControlLabel value={role} name="injury_state" 
-                        onClick={()=>changeCheck(index+"health")}
+                        onClick={()=> radioValues[0] = index+"health"}
                         control={<Radio />} label={role}/>
                     )
                 }
@@ -40,13 +72,13 @@ export default function PredictionScreen(){
             </FormLabel>
             <RadioGroup
                 row aria-label="role_radio"
-                defaultValue="Role Player"
+                defaultValue="Superstar"
                 name="radio-buttons-group"
             >
                 {
                     playerRoleArray.map((role, index)=>
                         <FormControlLabel value={role} name="player_state" 
-                        onClick={()=>changeCheck(index+"star")}
+                        onClick={()=> radioValues[1] = index+"star"}
                         control={<Radio />} label={role}/>
                     )
                 }
@@ -57,49 +89,29 @@ export default function PredictionScreen(){
             </FormLabel>
             <RadioGroup
                 row aria-label="fadraft_radio"
-                defaultValue="Decent"
+                defaultValue="Amazing"
                 name="radio-buttons-group"
             >
                 {
                     futureStateArray.map((role, index)=>
                     <FormControlLabel value={role} name="fadraft_state" 
-                    onClick={()=>changeCheck(index+"fadrft")}
+                    onClick={()=> radioValues[2] = index+"fadrft"}
                     control={<Radio />} label={role}/>
                     )
                 }
             </RadioGroup>
         </>;
 
-    //Radio forms is used in both methods, so make it a variable that can be added to jsx of either elements
-    const changeCheck = (param : string)=>{
-        console.log(param);
+    const methodHandler = (event: any)=>{
+        const methodName = event.target.id;
+        if(methodName === "shorter"){
+            setMethod(<ShorterMethod radioButtons={radioForms} />)
+        }
+        else if (methodName === "longer"){
+            setMethod(<LongerMethod radioButtons={radioForms} />);
+        }
     }
-
-    const StyledButton = styled(Button)({
-        boxShadow: 'none',
-        textTransform: 'none',
-        fontSize: "50pt",
-        border: '1px solid',
-        lineHeight: 1.5,
-        backgroundColor: 'white',
-        color:"black",
-        width:"20%",
-        borderColor: '#0063cc',
-        '&:hover': {
-          backgroundColor: 'black',
-          color: "white",
-          borderColor: '#0062cc',
-          boxShadow: 'none',
-        },
-        '&:active': {
-          boxShadow: 'none',
-          backgroundColor: '#0062cc',
-          borderColor: '#005cbf',
-        },
-        '&:focus': {
-          boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
-        },
-      });
+    
 
     /*
         For every screen in the app, the screen-style css class
@@ -114,19 +126,8 @@ export default function PredictionScreen(){
     return(
         <div className='screen-style'>
             <div className='child-screen-style'>
-                <br/>
-                <div className="centering">
-                    <StyledButton variant="contained" className="Button" 
-                            id="shorter">
-                        Shorter Method
-                        
-                    </StyledButton>
-                    &nbsp; &nbsp; &nbsp;
-                    <StyledButton variant="contained" className="Button" 
-                            id="longer">
-                        Longer Method
-                    </StyledButton>
-                </div>
+                <br/><br/><br/>
+                {method}
             </div>
         </div>
     );

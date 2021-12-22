@@ -1,47 +1,16 @@
 import { useContext, useState } from 'react'
 import { GlobalStoreContext} from '../store'
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { BasketballScreenButton } from './StyledButtons';
 export default function BasketballScreen(){
     //The state variable below will be updated everytime a prediction is made
     const [method, setMethod] = useState("");
-
-
     const navigate = useNavigate();
 
-
-    
-    const BootstrapButton = styled(Button)({
-        boxShadow: 'none',
-        textTransform: 'none',
-        fontSize: "30pt",
-        border: '1px solid',
-        lineHeight: 1.5,
-        backgroundColor: 'white',
-        color:"black",
-        width:"30%",
-        borderColor: '#0063cc',
-        '&:hover': {
-          backgroundColor: 'black',
-          color: "white",
-          borderColor: '#0062cc',
-          boxShadow: 'none',
-        },
-        '&:active': {
-          boxShadow: 'none',
-          backgroundColor: '#0062cc',
-          borderColor: '#005cbf',
-        },
-        '&:focus': {
-          boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
-        },
-      });
-
-    
-
-    /* clickHandler identifies which event was clicked on, and 
-    goes to the appropriate screen */
+    /* 
+        clickHandler identifies which event was clicked on, and 
+        goes to the appropriate screen 
+    */
     const clickHandler = (event: any)=>{
         console.log(event.target.id);
         switch(event.target.id){
@@ -79,27 +48,27 @@ export default function BasketballScreen(){
                 </div><br/>
 
                 <div className="centering">
-                    <BootstrapButton variant="contained" className="Button" 
+                    <BasketballScreenButton variant="contained" className="Button" 
                     id="make-prediction"
                     onClick={(event) => clickHandler(event)}>
                         Make a prediction
-                    </BootstrapButton>
+                    </BasketballScreenButton>
                 </div><br/>
 
                 <div className="centering">
-                    <BootstrapButton variant="contained" className="Button" 
+                    <BasketballScreenButton variant="contained" className="Button" 
                     id="view-predictions"
                     onClick={(event) => clickHandler(event)}>
                         View all predictions
-                    </BootstrapButton>
+                    </BasketballScreenButton>
                 </div><br/>
 
                 <div className="centering">
-                    <BootstrapButton variant="contained" className="Button" 
+                    <BasketballScreenButton variant="contained" className="Button" 
                     id="view-user-predictions"
                     onClick={(event) => clickHandler(event)}>
                         View your predictions
-                    </BootstrapButton>
+                    </BasketballScreenButton>
                 </div>
             </div>
         </div>
