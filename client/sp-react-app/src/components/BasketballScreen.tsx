@@ -1,9 +1,7 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { BasketballScreenButton } from './StyledButtons';
 //useSelector allows for retrieving data from a state (used for redux)
-import {useAppSelector} from '../reduxHookTypes'
-
+import {useAppSelector, useAppDispatch} from '../reduxHookTypes'
 export default function BasketballScreen(){
     /*
       In order to access data from a slice in the redux store while using typescript, 
@@ -19,8 +17,6 @@ export default function BasketballScreen(){
     */
     const user = useAppSelector(state => state.auth.value);
 
-    //The state variable below will be updated everytime a prediction is made
-    const [method, setMethod] = useState("");
     const navigate = useNavigate();
 
     /* 

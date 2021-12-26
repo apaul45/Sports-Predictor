@@ -1,17 +1,14 @@
 import { Box, Button, Container, FormControl, Grid, InputLabel, TextField } from "@mui/material";
 import { useState } from "react";
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 /*
     In order to pass in props to a component in typescript, 
     a interface can be defined and then destructured
     to get the necessary props
 */
-interface Props{
-    radioButtons : JSX.Element;
-    handleSubmit: Function;
-}
+import Props from './PredictionScreen'
+function LongerMethod({radioButtons, handleSubmit, methodCallback} : Props){
 
-function LongerMethod({radioButtons, handleSubmit} : Props){
     /*
         In TypeScript, an index signature (using a string value to access a value in a 
         object) requires two things in this case. First, the object itself must have
@@ -42,7 +39,8 @@ function LongerMethod({radioButtons, handleSubmit} : Props){
     //Object.entries() can be used to get an array with each keyname pair as an array
     const array = Object.entries(formObject);
     
-    /* A MUI grid can be used to control how 
+    /* 
+       A MUI grid can be used to control how 
        many inputs are grouped together: the xs (or sm)
        attribute allows for controlling how much space an
        item takes up in terms of its width. The max value is 12, 
@@ -73,6 +71,11 @@ function LongerMethod({radioButtons, handleSubmit} : Props){
     */
     return(
         <Container component="main">
+            <Button variant="outlined"
+            onClick={() => methodCallback()}>
+                <ArrowBackIcon/>
+                Back
+            </Button>
             <Box component="form" 
             onSubmit={(event: any)=>handleSubmit(event, formObject)}
             sx={{

@@ -6,7 +6,7 @@
     data.
 */
 
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 interface AuthState{
     value: {
@@ -22,17 +22,23 @@ export const authSlice = createSlice({
     name: "authentication",
     initialState: initialState,
     reducers: {
-        login: (state, action) => {
-            state.value = action.payload;
+        //The action payload must be specified as PayloadAction<type>
+        login: (state, action: PayloadAction<string>) => {
+            state.value.username = action.payload;
         },
-        register: (state, action)=> {
-            state.value = action.payload;
+        register: (state, action: PayloadAction<AuthState>)=> {
+            state = action.payload;
         },
         logout: (state) =>{
-            state = initialState;
+            state.value = initialState.value;
         }
     }
 });
+
+//In order to update state variables in this slice, the actions
+//(ie, login, register, and logout) also have to be exported so they can
+//be used when appropriate
+export const {login, register, logout} = authSlice.actions;
 
 //Since authSlice is NOT a reducer BUT a slice, also have to export authSlice.reducer
 export default authSlice.reducer;

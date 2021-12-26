@@ -14,37 +14,35 @@ export default function HomeWrapper(){
     //Set up HomeWrapper to contain the top title bar and nav bar with buttons going to each page
     return(
         <div id= "Select"> 
-						<h1>Sports Predictor</h1> <br/><br/>
+			<h1>Sports Predictor</h1> <br/><br/>
 
-						<div id="tabs-open">
+			<div id="tabs-open">
+				<HomeWrapperButton variant="contained" id="about"
+				style={{left: "2px"}}
+				onClick={()=>navigate("/about/")}>
+						About
+				</HomeWrapperButton>  
 
-							<HomeWrapperButton variant="contained" id="about"
-							style={{left: "2px"}}
-							onClick={()=>navigate("/about/")}>
-									About
-							</HomeWrapperButton>  
+				<HomeWrapperButton variant="contained"
+				style={{left: "12px"}}
+				onClick={()=>navigate("/select/")}>
+						Select a Sport
+				</HomeWrapperButton>
 
-							<HomeWrapperButton variant="contained"
-							style={{left: "12px"}}
-							onClick={()=>navigate("/select/")}>
-									Select a Sport
-							</HomeWrapperButton>
+				<HomeWrapperButton variant="contained" id="method"
+				style={{left: "22px"}}
+				onClick={()=>navigate("/how_done/")}>
+					How It's Done
+				</HomeWrapperButton>
 
-							<HomeWrapperButton variant="contained" id="method"
-							style={{left: "22px"}}
-							onClick={()=>navigate("/how_done/")}>
-								How It's Done
-							</HomeWrapperButton>
+				<img src={rightPic}
+				width="110" height="110" id='footballImg'>
+				</img>
 
-							<img src={rightPic}
-							width="110" height="110" id='footballImg'>
-							</img>
-
-							<img src={leftPic}
-							width="110" height="110" id='bballImg'>
-							</img>
-
-					</div>
+				<img src={leftPic}
+				width="110" height="110" id='bballImg'>
+				</img>
+		</div>
       </div>
     )
 }

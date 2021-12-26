@@ -10,13 +10,33 @@ import { useState } from 'react';
 import ShorterMethod from './ShorterMethod';
 import LongerMethod from './LongerMethod';
 import {PredictionButton} from './StyledButtons';
+import {useNavigate} from 'react-router-dom';
+import { Button } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+//This interface defines the types of props passed into the
+//shorter method and longer method components
+export default interface Props{
+    radioButtons : JSX.Element;
+    handleSubmit: Function;
+    methodCallback: Function;
+}
+
 export default function PredictionScreen(){
+    const navigate = useNavigate();
     /* radioValues is used to update the values checked off
        for each type of radio button */
     let radioValues = ["0health","0star","0fadrft"];
 
     const methodButtons = 
         <>
+            <Button
+            onClick={() => navigate("/bball/")}
+            variant="outlined"
+            style={{position: "absolute", left:"6.5%"}}>
+                <ArrowBackIcon/>
+                Back
+            </Button>
+            
             <div className = "centering">
                 <PredictionButton variant="contained" className="Button" 
                 id="shorter"
@@ -109,13 +129,20 @@ export default function PredictionScreen(){
         console.log(formObject);
     }
 
+    //returnToPage is used when the user clicks back on one of the 
+    //method screens
+    const returnToPage = () => {
+        setMethod(methodButtons);
+    }
     const methodHandler = (event: any)=>{
         const methodName = event.target.id;
         if(methodName === "shorter"){
-            setMethod(<ShorterMethod radioButtons={radioForms} handleSubmit={handleSubmit}/>)
+            setMethod(<ShorterMethod radioButtons={radioForms} handleSubmit={handleSubmit}
+            methodCallback={returnToPage}/>)
         }
         else if (methodName === "longer"){
-            setMethod(<LongerMethod radioButtons={radioForms} handleSubmit={handleSubmit}/>);
+            setMethod(<LongerMethod radioButtons={radioForms} handleSubmit={handleSubmit}
+                methodCallback={returnToPage}/>);
         }
     }
 

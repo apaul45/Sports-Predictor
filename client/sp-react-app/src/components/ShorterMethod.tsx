@@ -6,12 +6,14 @@
 
 import { Container, FormControl, Box, Grid, InputLabel, TextField, Button } from "@mui/material";
 import { useState } from "react";
-
-interface Props{
-    radioButtons : JSX.Element;
-    handleSubmit: Function;
-}
-function ShorterMethod({radioButtons, handleSubmit} : Props){
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+/*
+    In order to pass in props to a component in typescript, 
+    a interface can be defined and then destructured
+    to get the necessary props
+*/
+import Props from './PredictionScreen'
+function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
     /*
         In TypeScript, an index signature (using a string value to access a value in a 
         object) requires two things in this case. First, the object itself must have
@@ -28,7 +30,6 @@ function ShorterMethod({radioButtons, handleSubmit} : Props){
     const [formObject, setFormObject] = useState(initObject);
     
     //See above explanation on index signatures
-    
     const handleChange = (attribute: string, event:any) => {
         formObject[attribute] = event.target.value;
         setFormObject(formObject);
@@ -64,7 +65,15 @@ function ShorterMethod({radioButtons, handleSubmit} : Props){
     );
     return(
         <Container component="main">
-            <br/>
+
+            <Button variant="outlined"
+            onClick={() => methodCallback()}>
+                <ArrowBackIcon/>
+                Back
+            </Button>
+
+            <br/><br/>
+
             <Box component="form" 
             onSubmit={(event: any)=>handleSubmit(event, formObject)}
             sx={{
