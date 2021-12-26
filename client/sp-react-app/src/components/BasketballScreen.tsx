@@ -1,8 +1,24 @@
-import { useContext, useState } from 'react'
-import { GlobalStoreContext} from '../store'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { BasketballScreenButton } from './StyledButtons';
+//useSelector allows for retrieving data from a state (used for redux)
+import {useAppSelector} from '../reduxHookTypes'
+
 export default function BasketballScreen(){
+    /*
+      In order to access data from a slice in the redux store while using typescript, 
+      a few things have to happen: 
+
+      1. The types for the RootState and Dispath have to be defined and exported 
+      2. When using a hook such as useSelector, the state has to be explicitly defined as type RootState (state:RootState)
+      3. For the slice itself, the values in its state have to be explicitly typed (ie, a interface 
+      must be created for them). In order to be extracted in React components. 
+
+      Step 2 can be skipped if a file containing 
+      type definitions for hook types is created
+    */
+    const user = useAppSelector(state => state.auth.value);
+
     //The state variable below will be updated everytime a prediction is made
     const [method, setMethod] = useState("");
     const navigate = useNavigate();
@@ -12,7 +28,6 @@ export default function BasketballScreen(){
         goes to the appropriate screen 
     */
     const clickHandler = (event: any)=>{
-        console.log(event.target.id);
         switch(event.target.id){
             case("make-prediction"):{
                 navigate("/bball/make-prediction");
@@ -44,7 +59,7 @@ export default function BasketballScreen(){
                 <br/>
                 <div className='centering'
                 style={{fontSize: "30pt"}}>
-                    Welcome JJ!
+                    Welcome {user.username}!
                 </div><br/>
 
                 <div className="centering">

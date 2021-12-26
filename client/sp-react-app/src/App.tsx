@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 //IMPORT THE GLOBAL STORE TO USE AS THE STATE MANAGEMENT SYSTEM
-import { GlobalStoreContextProvider } from './store'
 import BasketBallScreen from './components/BasketballScreen';
 import MethodScreen from './components/MethodScreen';
 import SelectScreen from './components/SelectScreen';
@@ -11,7 +10,6 @@ import PredictionScreen from './components/PredictionScreen';
 function App() {
   return (
     <BrowserRouter>
-      <GlobalStoreContextProvider>
       <HomeWrapper/>
       <Routes>
         {/* Provide the global store to all components 
@@ -22,7 +20,6 @@ function App() {
           <Route path="/bball/" element={<BasketBallScreen/>}></Route>
           <Route path="/bball/make-prediction" element={<PredictionScreen/>}></Route>
       </Routes>
-      </GlobalStoreContextProvider>
     </BrowserRouter>
   );
 }

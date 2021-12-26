@@ -20,6 +20,7 @@ export default function PredictionScreen(){
             <div className = "centering">
                 <PredictionButton variant="contained" className="Button" 
                 id="shorter"
+                
                 onClick={(event)=> methodHandler(event)}>
                     Shorter Method
                 </PredictionButton>
