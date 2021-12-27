@@ -4,7 +4,7 @@
 
 */
 import AboutScreen from "./AboutScreen";
-import BasketballScreen from "./BasketballScreen";
+import BasketballScreen from "./HomeScreen";
 import HomeWrapper from "./HomeWrapper";
 import MethodScreen from "./MethodScreen";
 import SelectScreen from "./SelectScreen";

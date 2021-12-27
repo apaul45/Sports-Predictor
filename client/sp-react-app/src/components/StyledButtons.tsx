@@ -32,7 +32,7 @@ const PredictionButton = styled(Button)({
         },
     });
 
-const BasketballScreenButton = styled(Button)({
+const HomeScreenButton = styled(Button)({
         boxShadow: 'none',
         textTransform: 'none',
         fontSize: "30pt",
@@ -86,6 +86,6 @@ const HomeWrapperButton= styled(Button)({
     });
 export{
     PredictionButton,
-    BasketballScreenButton,
+    HomeScreenButton,
     HomeWrapperButton
 };

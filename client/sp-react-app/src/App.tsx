@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 //IMPORT THE GLOBAL STORE TO USE AS THE STATE MANAGEMENT SYSTEM
-import BasketBallScreen from './components/BasketballScreen';
+import HomeScreen from './components/HomeScreen';
 import MethodScreen from './components/MethodScreen';
 import SelectScreen from './components/SelectScreen';
 import AboutScreen from './components/AboutScreen';
@@ -16,9 +16,9 @@ function App() {
         by wrapping the provider around them */}
           <Route path="/about/" element={<AboutScreen/>}></Route>
           <Route path="/how_done/" element={<MethodScreen/>}></Route>
-          <Route path="/select/" element={<SelectScreen/>}></Route>
-          <Route path="/bball/" element={<BasketBallScreen/>}></Route>
-          <Route path="/bball/make-prediction" element={<PredictionScreen/>}></Route>
+          <Route path="/make-prediction/select/" element={<SelectScreen/>}></Route>
+          <Route path="/home/" element={<HomeScreen/>}></Route>
+          <Route path="/make-prediction" element={<PredictionScreen/>}></Route>
       </Routes>
     </BrowserRouter>
   );

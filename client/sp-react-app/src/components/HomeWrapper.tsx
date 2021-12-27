@@ -25,8 +25,8 @@ export default function HomeWrapper(){
 
 				<HomeWrapperButton variant="contained"
 				style={{left: "12px"}}
-				onClick={()=>navigate("/select/")}>
-						Select a Sport
+				onClick={()=>navigate("/home/")}>
+						Home
 				</HomeWrapperButton>
 
 				<HomeWrapperButton variant="contained" id="method"

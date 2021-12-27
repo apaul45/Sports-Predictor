@@ -30,13 +30,13 @@ export default function PredictionScreen(){
     const methodButtons = 
         <>
             <Button
-            onClick={() => navigate("/bball/")}
+            onClick={() => navigate("/make-prediction/select")}
             variant="outlined"
             style={{position: "absolute", left:"6.5%"}}>
                 <ArrowBackIcon/>
                 Back
             </Button>
-            
+
             <div className = "centering">
                 <PredictionButton variant="contained" className="Button" 
                 id="shorter"

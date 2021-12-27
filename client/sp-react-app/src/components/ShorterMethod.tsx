@@ -13,6 +13,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
     to get the necessary props
 */
 import Props from './PredictionScreen'
+
 function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
     /*
         In TypeScript, an index signature (using a string value to access a value in a 
