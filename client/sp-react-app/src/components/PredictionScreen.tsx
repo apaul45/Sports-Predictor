@@ -1,6 +1,6 @@
 /*
     PredictionScreen is the component handling the choosing of prediction method 
-    and creation of predictions
+    and calculation of new predictions
 */
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -14,6 +14,8 @@ import {useNavigate} from 'react-router-dom';
 import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Player from '../classes/player-model';
+import playerGraph from '../classes/player-graph';
+
 //This interface defines the types of props passed into the
 //shorter method and longer method components
 export default interface Props{
@@ -22,11 +24,28 @@ export default interface Props{
     methodCallback: Function;
 }
 
+//The arrays below are used to create the radio buttons
+const playerRoleArray = ["Superstar", "Star", "All Star", "Role Player"];
+const teamStateArray = ["All Healthy", "Mostly Healthy", "Sometimes Healthy", "Rarely Healthy"];
+const futureStateArray = ["Amazing", "Good", "Decent", "Terrible"];
+
+const teamArray = ["Contender", "Playoffs", "Almost Playoff", "Lottery"];
+
+//Along with the 3 arrays above, the two below are used to calculate the total graph weight
+const startingWeights = [[-.2, .1, .7, 1.5], [-.65, -.8, -1, -2.5], [-1.2, -.75, .35, 1]];
+const subtractValues = [[0,-.3,-.8,-1.5], [0, -2,-3,-3.55], [0,-.45,-.6,-1.5]];
+
+/* radioValues is used to update the values checked off
+for each type of radio button 
+*/
+let radioValues = {health: "0", player_role: "Superstar", fadrft: "0"};
+
+let newGraph = new playerGraph(12);
+newGraph.constructGraph(playerRoleArray, teamArray, teamStateArray, 
+                futureStateArray, startingWeights, subtractValues)
+
 export default function PredictionScreen(){
     const navigate = useNavigate();
-    /* radioValues is used to update the values checked off
-       for each type of radio button */
-    let radioValues = ["0health","0star","0fadrft"];
 
     const methodButtons = 
         <>
@@ -63,11 +82,6 @@ export default function PredictionScreen(){
     /* When the user clicks on a method type, method should be 
     changed to that method's inputs */
     const [method, setMethod] = useState(methodButtons);
-    
-    //The arrays below are used to create the radio buttons
-    const playerRoleArray = ["Superstar", "Star", "All Star", "Role Player"];
-    const teamStateArray = ["All Healthy", "Mostly Healthy", "Sometimes Healthy", "Rarely Healthy"];
-    const futureStateArray = ["Amazing", "Good", "Decent", "Terrible"];
 
     //Both the shorter and longer method use the radio buttons below
     const radioForms:JSX.Element = 
@@ -83,7 +97,7 @@ export default function PredictionScreen(){
                 {
                     teamStateArray.map((role:string, index:number)=>
                         <FormControlLabel value={role} name="injury_state" 
-                        onClick={()=> radioValues[0] = index+"health"}
+                        onClick={()=> radioValues.health = String(index)}
                         control={<Radio />} label={role}/>
                     )
                 }
@@ -98,9 +112,9 @@ export default function PredictionScreen(){
                 name="radio-buttons-group"
             >
                 {
-                    playerRoleArray.map((role, index)=>
+                    playerRoleArray.map((role)=>
                         <FormControlLabel value={role} name="player_state" 
-                        onClick={()=> radioValues[1] = index+"star"}
+                        onClick={()=> radioValues.player_role = role}
                         control={<Radio />} label={role}/>
                     )
                 }
@@ -117,14 +131,14 @@ export default function PredictionScreen(){
                 {
                     futureStateArray.map((role, index)=>
                     <FormControlLabel value={role} name="fadraft_state" 
-                    onClick={()=> radioValues[2] = index+"fadrft"}
+                    onClick={()=> radioValues.fadrft = String(index)}
                     control={<Radio />} label={role}/>
                     )
                 }
             </RadioGroup>
         </>;
 
-    //Callback function for the submit event of each method forms
+    //Callback function for the submit event of each method forms-- handles prediction calculation
     //Make sure it is async so that data can be synchronously fetched from api for shorter method 
      async function handleSubmit(event: any, formObject: object){
         event.preventDefault();
@@ -136,8 +150,9 @@ export default function PredictionScreen(){
             await newPlayer.fetchStats(formObject);
             console.log(newPlayer.getInfo());
         }
+        newPlayer.predictionCalculator(radioValues, newGraph);
+        console.log(newPlayer.getInfo());
     }
-
     //returnToPage is used when the user clicks back on one of the 
     //method screens
     const returnToPage = () => {

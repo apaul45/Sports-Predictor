@@ -21,7 +21,7 @@ export const predictionSlice = createSlice({
             state = action.payload;
         },
         addPrediction: (state, action:PayloadAction<any>) => {
-            state.data = [...state.data, action.payload]
+            state.data = [...state.data, action.payload];
         }
     }
 });

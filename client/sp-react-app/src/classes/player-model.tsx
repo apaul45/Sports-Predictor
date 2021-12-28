@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import playerGraph from '../classes/player-graph';
 /*
     This class contains the necessary info for a player, along with the 
     methods necessary to calculate a prediction
@@ -20,6 +20,7 @@ const perGameWeights = [1, 4, 5, 10, 10];
 
 export default class Player {
     info:any | undefined;
+    totalWeight:number = 0;
 
     constructor(stats: any){
         this.info = stats;
@@ -164,9 +165,19 @@ export default class Player {
         return ageWeight;
     }
 
-    predictStats(totalWeight: number){
-        perGame.forEach((stat: any, index: number) => 
-            this.info[stat] /= (totalWeight/perGameWeights[index])
+    predictionCalculator(radioValues:any, graph:playerGraph){
+        //Add age and injury weights to the total weight
+        this.totalWeight += (this.getAgeWeight() + this.getInjuryWeight());
+        this.totalWeight += graph.getPathWeight(radioValues.player_role, this.getTeamRank(), radioValues.health, radioValues.fadrft);
+
+        this.predictStats();
+    }
+
+    predictStats(){
+        perGame.forEach((stat: any, index: number) => {
+           const newStat:number =  Number(this.info[stat[0]]) + Number(this.totalWeight/perGameWeights[index]);
+           this.info[stat[0]] = newStat;
+        }
         );
 
         console.log(this.info);
