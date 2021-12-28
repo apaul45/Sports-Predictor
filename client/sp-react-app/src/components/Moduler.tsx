@@ -4,14 +4,14 @@
 
 */
 import AboutScreen from "./AboutScreen";
-import BasketballScreen from "./HomeScreen";
+import HomeScreen from "./HomeScreen";
 import HomeWrapper from "./HomeWrapper";
 import MethodScreen from "./MethodScreen";
 import SelectScreen from "./SelectScreen";
 import PredictionScreen from "./PredictionScreen";
 export{
     AboutScreen,
-    BasketballScreen,
+    HomeScreen,
     HomeWrapper,
     MethodScreen,
     SelectScreen,

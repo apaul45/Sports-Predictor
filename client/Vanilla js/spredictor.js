@@ -18,7 +18,7 @@ function compare(a,b){
         return -1;
     return 1;
     
-  }
+}
 function retrieveTeams(){
     if (localStorage.getItem(standingsKey) == null && localStorage.getItem(teamsKey)==null){
         let teams = [];

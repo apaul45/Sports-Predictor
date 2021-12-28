@@ -2,7 +2,7 @@
     This file is where all server (Express for HTTP requests, 
     Apollo for graphQl) configuration is done
 */
-import express from 'express';
+import express = require('express');
 
 /*
     apollo-server-express can be used instead of apollo-server in order 

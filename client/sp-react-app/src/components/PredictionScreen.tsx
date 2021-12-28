@@ -13,6 +13,7 @@ import {PredictionButton} from './StyledButtons';
 import {useNavigate} from 'react-router-dom';
 import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Player from '../classes/player-model';
 //This interface defines the types of props passed into the
 //shorter method and longer method components
 export default interface Props{
@@ -124,9 +125,17 @@ export default function PredictionScreen(){
         </>;
 
     //Callback function for the submit event of each method forms
-    const handleSubmit = (event: any, formObject: object)=>{
+    //Make sure it is async so that data can be synchronously fetched from api for shorter method 
+     async function handleSubmit(event: any, formObject: object){
         event.preventDefault();
-        console.log(formObject);
+        let newPlayer = new Player(formObject);
+
+        /* If shorter method, then this.info must be updated to
+           data fetched from the NBA stats api */
+        if (!("gp" in formObject)) {
+            await newPlayer.fetchStats(formObject);
+            console.log(newPlayer.getInfo());
+        }
     }
 
     //returnToPage is used when the user clicks back on one of the 

@@ -7,6 +7,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
     to get the necessary props
 */
 import Props from './PredictionScreen'
+
 function LongerMethod({radioButtons, handleSubmit, methodCallback} : Props){
 
     /*

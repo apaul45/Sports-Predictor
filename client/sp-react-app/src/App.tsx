@@ -7,6 +7,7 @@ import SelectScreen from './components/SelectScreen';
 import AboutScreen from './components/AboutScreen';
 import HomeWrapper from './components/HomeWrapper';
 import PredictionScreen from './components/PredictionScreen';
+
 function App() {
   return (
     <BrowserRouter>

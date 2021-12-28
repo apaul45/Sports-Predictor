@@ -1,9 +1,3 @@
-/*
-    In order to pass in props to a component, 
-    a interface can be defined and then destructured
-    to get the necessary props
-*/
-
 import { Container, FormControl, Box, Grid, InputLabel, TextField, Button } from "@mui/material";
 import { useState } from "react";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -34,7 +28,6 @@ function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
     const handleChange = (attribute: string, event:any) => {
         formObject[attribute] = event.target.value;
         setFormObject(formObject);
-        console.log(formObject[attribute])
     }
 
     //Object.entries() can be used to get an array with each keyname pair as an array

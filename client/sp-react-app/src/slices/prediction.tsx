@@ -20,7 +20,7 @@ export const predictionSlice = createSlice({
         setPredictions: (state, action: PayloadAction<PredictionState>) => {
             state = action.payload;
         },
-        addPrediction: (state, action:PayloadAction<Object>) => {
+        addPrediction: (state, action:PayloadAction<any>) => {
             state.data = [...state.data, action.payload]
         }
     }
