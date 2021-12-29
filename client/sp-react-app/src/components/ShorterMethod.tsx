@@ -20,7 +20,7 @@ function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
         https://stackoverflow.com/questions/55831886/typescript-an-index-signature-parameter-must-be-a-string-or-number-when-try
     */
     const initObject:{[key: string]: any} = {
-        name: "", age: 0, team: ""
+        name: "", team: ""
     };
     const [formObject, setFormObject] = useState(initObject);
 
@@ -80,7 +80,7 @@ function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
        in each row
     */
     const textfields = array.map(entry => 
-        <Grid item xs={4.0}>
+        <Grid item xs={2.0}>
             <InputLabel>
                 Enter the player's {entry[0]}
             </InputLabel>
@@ -111,7 +111,10 @@ function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
                 alignItems: 'center',
             }}
             >
-                <Grid container spacing={29}>
+                <Grid container spacing={2}
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="center">
                     {textfields}
                 </Grid>
 
