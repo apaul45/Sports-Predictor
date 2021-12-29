@@ -63,13 +63,13 @@ function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
         handleSubmit(formObject, setDisplay);
 
         //Reset the display back to the submit button after 5 seconds
-        window.setTimeout(function(){setDisplay(initDisplay)}, 6000);
+        window.setTimeout(function(){setDisplay(initDisplay)}, 5000);
     }
     
     //Object.entries() can be used to get an array with each keyname pair as an array
     const array = Object.entries(formObject);
     /* 
-        A MUI grid can be used to control how 
+       A MUI grid can be used to control how 
        many inputs are grouped together: the xs (or sm)
        attribute allows for controlling how much space an
        item takes up in terms of its width. The max value is 12, 
@@ -95,7 +95,6 @@ function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
     );
     return(
         <Container component="main">
-
             <Button variant="outlined"
             onClick={() => methodCallback()}>
                 <ArrowBackIcon/>

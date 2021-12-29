@@ -10,7 +10,7 @@ import MethodScreen from "./MethodScreen";
 import SelectScreen from "./SelectScreen";
 import PredictionScreen from "./PredictionScreen";
 import ViewPredictions from "./ViewPredictions";
-
+import ErrorModal from "./ErrorModal";
 export{
     AboutScreen,
     HomeScreen,
@@ -19,4 +19,5 @@ export{
     SelectScreen,
     PredictionScreen,
     ViewPredictions,
+    ErrorModal
 }

@@ -16,7 +16,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Player from '../classes/player-model';
 import playerGraph from '../classes/player-graph';
 import {useAppDispatch} from '../reduxHookTypes';
-import {addPrediction} from '../slices/prediction';
+import {addPrediction, setError} from '../slices/prediction';
 
 //This interface defines the types of props passed into the
 //shorter method and longer method components
@@ -148,26 +148,31 @@ export default function PredictionScreen(){
     //Callback function for the submit event of each method forms-- handles prediction calculation
     //Make sure it is async so that data can be synchronously fetched from api for shorter method 
      async function handleSubmit(formObject: object, setDisplay:React.Dispatch<React.SetStateAction<JSX.Element>>){
-        let newPlayer = new Player(formObject);
+        try{
+            let newPlayer = new Player(formObject);
 
-        /* If shorter method, then this.info must be updated to
-           data fetched from the NBA stats api */
-        if (!("gp" in formObject)) {
-            await newPlayer.fetchStats(formObject);
+            /* If shorter method, then this.info must be updated to
+               data fetched from the NBA stats api */
+            if (!("gp" in formObject)) {
+                await newPlayer.fetchStats(formObject);
+                console.log(newPlayer.getInfo());
+            }
+            newPlayer.predictionCalculator(radioValues, newGraph);
             console.log(newPlayer.getInfo());
+    
+            //Add this prediction to the existing list of predictions
+            dispatch(addPrediction(newPlayer));
+    
+            //Return a div that will notify the user that the prediction was successful
+            const success:JSX.Element = <div className="fade-in" id="prediction-successful">
+                                            Prediction Successful! 
+                                            Return to the home page to view
+                                        </div>
+            setDisplay(success);
         }
-        newPlayer.predictionCalculator(radioValues, newGraph);
-        console.log(newPlayer.getInfo());
-
-        //Add this prediction to the existing list of predictions
-        dispatch(addPrediction(newPlayer));
-
-        //Return a div that will notify the user that the prediction was successful
-        const success:JSX.Element = <div className="fade-in" id="prediction-successful">
-                                        Prediction Successful! 
-                                        Return to the home page to view
-                                    </div>
-        setDisplay(success);
+        catch(error:any){
+            dispatch(setError("Prediction unsuccessful. Please recheck or enter valid information."));
+        }
     }
 
     //returnToPage is used when the user clicks back on one of the 

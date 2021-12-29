@@ -7,8 +7,12 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
     to get the necessary props
 */
 import Props from './PredictionScreen'
+import { useAppDispatch } from "../reduxHookTypes";
+import { setError } from "../slices/prediction";
 
 function LongerMethod({radioButtons, handleSubmit, methodCallback} : Props){
+    
+    const dispatch = useAppDispatch();
 
     /*
         In TypeScript, an index signature (using a string value to access a value in a 
@@ -67,11 +71,50 @@ function LongerMethod({radioButtons, handleSubmit, methodCallback} : Props){
            NOTE: It is NECESSARY for handleSubmit to set this because it is an async function. 
            That means trying to return a jsx element to set display to will be more complicated
            due to the async await logic in js (handling Promises)
+
+           Only allow for handleSubmit to be called after error checking
         */
-        handleSubmit(formObject, setDisplay);
+       if (!checkValidity()){
+            handleSubmit(formObject, setDisplay);
+       }
 
         //Reset the display back to the submit button after 5 seconds
-        window.setTimeout(function(){setDisplay(initDisplay)}, 6000);
+        window.setTimeout(function(){setDisplay(initDisplay)}, 5000);
+    }
+
+    const checkValidity = () => {
+        const teamStandings = JSON.parse(localStorage.getItem("nba-teams") || "{}");
+
+        //Regex for alphabet characters and spaces
+        const regex = /^[a-zA-Z ]+$/;
+
+        //First check if the user entered a correct name 
+        if(!regex.test(formObject.name)){
+            dispatch(setError("Please enter a valid name"));
+            return true;
+        }
+        //Then check if the user entered a correct team name (abbreviated)
+        else if (teamStandings.filter((team:any) => team.shortName === formObject.team).length === 0){
+            dispatch(setError("Please enter a valid team"));
+            return true;
+        }
+        /* Since every field is saved as a string, the field has to be converted
+           to a number before being tested with Number.isFinite */
+        //Check if the age is both a number and greater than 17
+        else if (!Number.isFinite(Number(formObject.age)) || Number(formObject.age) < 17){
+            dispatch(setError("Please enter a valid age"));
+            return true;
+        }
+        else{
+            //Check if the user entered a correct value for each statistic
+            let stats = ["ppg", "rpg", "apg", "bpg", "spg", "gp"];
+            stats = stats.filter((stat:string) => Number.isFinite(Number(formObject[stat])));
+            if (stats.length<6){
+                dispatch(setError("Please enter a valid stat"));
+                return true;
+            }
+        }
+        return false;
     }
 
     //Object.entries() can be used to get an array with each keyname pair as an array

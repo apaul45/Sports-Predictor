@@ -8,7 +8,8 @@ import {HomeScreen,
        ViewPredictions, 
        PredictionScreen, 
        AboutScreen, 
-       HomeWrapper} 
+       HomeWrapper,
+       ErrorModal} 
 from './components/Moduler';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/make-prediction" element={<PredictionScreen/>}></Route>
           <Route path="/home/view-predictions" element={<ViewPredictions/>}></Route>
       </Routes>
+      <ErrorModal/>
     </BrowserRouter>
   );
 }
