@@ -31,9 +31,10 @@ export default function HomeScreen(){
     */
 
     return(
-        <div id= "h-scromeeen" className='screen-style'>
+        <div id= "home-screen" className='screen-style'>
             <div className='child-screen-style'>
                 <br/>
+                
                 <div className='centering'
                 style={{fontSize: "30pt"}}>
                     Welcome {user.username}!
@@ -49,7 +50,8 @@ export default function HomeScreen(){
 
                 <div className="centering">
                     <HomeScreenButton variant="contained" className="Button" 
-                    id="view-predictions">
+                    id="view-predictions"
+                    onClick={() => navigate("/home/view-predictions")}>
                         View all predictions
                     </HomeScreenButton>
                 </div><br/>

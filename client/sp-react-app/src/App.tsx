@@ -1,12 +1,15 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 //IMPORT THE GLOBAL STORE TO USE AS THE STATE MANAGEMENT SYSTEM
-import HomeScreen from './components/HomeScreen';
-import MethodScreen from './components/MethodScreen';
-import SelectScreen from './components/SelectScreen';
-import AboutScreen from './components/AboutScreen';
-import HomeWrapper from './components/HomeWrapper';
-import PredictionScreen from './components/PredictionScreen';
+
+import {HomeScreen, 
+       MethodScreen, 
+       SelectScreen, 
+       ViewPredictions, 
+       PredictionScreen, 
+       AboutScreen, 
+       HomeWrapper} 
+from './components/Moduler';
 
 function App() {
   return (
@@ -20,6 +23,7 @@ function App() {
           <Route path="/make-prediction/select/" element={<SelectScreen/>}></Route>
           <Route path="/home/" element={<HomeScreen/>}></Route>
           <Route path="/make-prediction" element={<PredictionScreen/>}></Route>
+          <Route path="/home/view-predictions" element={<ViewPredictions/>}></Route>
       </Routes>
     </BrowserRouter>
   );

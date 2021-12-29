@@ -11,10 +11,12 @@ import ShorterMethod from './ShorterMethod';
 import LongerMethod from './LongerMethod';
 import {PredictionButton} from './StyledButtons';
 import {useNavigate} from 'react-router-dom';
-import { Button } from '@mui/material';
+import {Button} from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Player from '../classes/player-model';
 import playerGraph from '../classes/player-graph';
+import {useAppDispatch} from '../reduxHookTypes';
+import {addPrediction} from '../slices/prediction';
 
 //This interface defines the types of props passed into the
 //shorter method and longer method components
@@ -24,7 +26,8 @@ export default interface Props{
     methodCallback: Function;
 }
 
-//The arrays below are used to create the radio buttons
+//The 3 arrays below are used to create the radio buttons
+//The 4 arrays below represent each factor represented in the playerGraph
 const playerRoleArray = ["Superstar", "Star", "All Star", "Role Player"];
 const teamStateArray = ["All Healthy", "Mostly Healthy", "Sometimes Healthy", "Rarely Healthy"];
 const futureStateArray = ["Amazing", "Good", "Decent", "Terrible"];
@@ -35,8 +38,9 @@ const teamArray = ["Contender", "Playoffs", "Almost Playoff", "Lottery"];
 const startingWeights = [[-.2, .1, .7, 1.5], [-.65, -.8, -1, -2.5], [-1.2, -.75, .35, 1]];
 const subtractValues = [[0,-.3,-.8,-1.5], [0, -2,-3,-3.55], [0,-.45,-.6,-1.5]];
 
-/* radioValues is used to update the values checked off
-for each type of radio button 
+/* 
+    radioValues is used to update the values checked off
+    for each type of radio button 
 */
 let radioValues = {health: "0", player_role: "Superstar", fadrft: "0"};
 
@@ -45,6 +49,9 @@ newGraph.constructGraph(playerRoleArray, teamArray, teamStateArray,
                 futureStateArray, startingWeights, subtractValues)
 
 export default function PredictionScreen(){
+    //Make sure to update the list of predictions once a prediction is calculated
+    const dispatch = useAppDispatch();
+
     const navigate = useNavigate();
 
     const methodButtons = 
@@ -140,8 +147,7 @@ export default function PredictionScreen(){
 
     //Callback function for the submit event of each method forms-- handles prediction calculation
     //Make sure it is async so that data can be synchronously fetched from api for shorter method 
-     async function handleSubmit(event: any, formObject: object){
-        event.preventDefault();
+     async function handleSubmit(formObject: object, setDisplay:React.Dispatch<React.SetStateAction<JSX.Element>>){
         let newPlayer = new Player(formObject);
 
         /* If shorter method, then this.info must be updated to
@@ -152,12 +158,25 @@ export default function PredictionScreen(){
         }
         newPlayer.predictionCalculator(radioValues, newGraph);
         console.log(newPlayer.getInfo());
+
+        //Add this prediction to the existing list of predictions
+        dispatch(addPrediction(newPlayer));
+
+        //Return a div that will notify the user that the prediction was successful
+        const success:JSX.Element = <div className="fade-in" id="prediction-successful">
+                                        Prediction Successful! 
+                                        Return to the home page to view
+                                    </div>
+        setDisplay(success);
     }
+
     //returnToPage is used when the user clicks back on one of the 
     //method screens
     const returnToPage = () => {
         setMethod(methodButtons);
     }
+
+    //Handles sending the user to the page containing the correct form
     const methodHandler = (event: any)=>{
         const methodName = event.target.id;
         if(methodName === "shorter"){

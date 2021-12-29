@@ -1,4 +1,4 @@
-import { Container, FormControl, Box, Grid, InputLabel, TextField, Button } from "@mui/material";
+import { Container, FormControl, Box, Grid, InputLabel, TextField, Button, LinearProgress } from "@mui/material";
 import { useState } from "react";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 /*
@@ -23,6 +23,19 @@ function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
         name: "", age: 0, team: ""
     };
     const [formObject, setFormObject] = useState(initObject);
+
+    /*
+        This string variable helps to tell what to display in place of the submit button:
+        if submit is clicked, the button turns into a loading animation, and then into a 
+        div that notifies the user that their prediction was successful 
+    */
+    const initDisplay:JSX.Element = <Button type="submit"
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
+                                    >
+                                        Enter
+                                    </Button>;
+    const [display, setDisplay] = useState(initDisplay);
     
     //See above explanation on index signatures
     const handleChange = (attribute: string, event:any) => {
@@ -30,6 +43,29 @@ function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
         setFormObject(formObject);
     }
 
+    const submitHandler = (event:any) => {
+        event.preventDefault();
+
+        //Allow for the loading animatin to appear in place of the submit button
+        setDisplay(<Box sx={{ width: '100%' }}>
+                        <LinearProgress />
+                  </Box>);
+
+        /* 
+           The handleSubmit callback in PredictionScreen will handle 
+           checking, creating, and adding a prediction. It will then set the display 
+           to a div notifying the user that their prediction was successfully created.
+
+           NOTE: It is NECESSARY for handleSubmit to set this because it is an async function. 
+           That means trying to return a jsx element to set display to will be more complicated
+           due to the async await logic in js (handling Promises)
+        */
+        handleSubmit(formObject, setDisplay);
+
+        //Reset the display back to the submit button after 5 seconds
+        window.setTimeout(function(){setDisplay(initDisplay)}, 6000);
+    }
+    
     //Object.entries() can be used to get an array with each keyname pair as an array
     const array = Object.entries(formObject);
     /* 
@@ -69,7 +105,7 @@ function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
             <br/><br/>
 
             <Box component="form" 
-            onSubmit={(event: any)=>handleSubmit(event, formObject)}
+            onSubmit={(event: any)=>submitHandler(event)}
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -86,16 +122,8 @@ function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
                 style={{marginTop: 48}}>
                     {radioButtons}
                 </FormControl>
-
                 <br/>
-
-                <Button
-                type="submit"
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                >
-                    Enter
-                </Button>
+                {display}
             </Box>
         </Container>
     );

@@ -9,11 +9,14 @@ import HomeWrapper from "./HomeWrapper";
 import MethodScreen from "./MethodScreen";
 import SelectScreen from "./SelectScreen";
 import PredictionScreen from "./PredictionScreen";
+import ViewPredictions from "./ViewPredictions";
+
 export{
     AboutScreen,
     HomeScreen,
     HomeWrapper,
     MethodScreen,
     SelectScreen,
-    PredictionScreen
+    PredictionScreen,
+    ViewPredictions,
 }

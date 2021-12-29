@@ -262,13 +262,6 @@ containing the buttons, aka the surrounding div element */
   justify-content: center;
 }
 /* Code below handles fading in and out */
-.fade-in {
-animation: fadeIn ease 4s;
--webkit-animation: fadeIn ease 6s;
--moz-animation: fadeIn ease 6s;
--o-animation: fadeIn ease 6s;
--ms-animation: fadeIn ease 6s;
-}
 
 /*
   To apply a style to EVERYTHING inside a container (ie, apply 
@@ -296,6 +289,19 @@ animation: fadeIn ease 4s;
   position: relative;
   bottom: -40px;
 }
+#prediction-successful{
+  font-family: 'Actor', sans-serif;
+  font-size: 30pt;
+  font-weight: bold;
+  background-color: orange;
+}
+.fade-in {
+  animation: fadeIn ease 4s;
+  -webkit-animation: fadeIn ease 6s;
+  -moz-animation: fadeIn ease 6s;
+  -o-animation: fadeIn ease 6s;
+  -ms-animation: fadeIn ease 6s;
+  }
 @keyframes fadeIn {
   0% {
     opacity:0;

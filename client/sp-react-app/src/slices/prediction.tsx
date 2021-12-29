@@ -7,9 +7,10 @@
 */
 
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import Player from '../classes/player-model';
 
 interface PredictionState{ 
-    data: Array<any>
+    data: Array<Player>
 }
 const initialState:PredictionState = {data: []};
 
@@ -20,11 +21,14 @@ export const predictionSlice = createSlice({
         setPredictions: (state, action: PayloadAction<PredictionState>) => {
             state = action.payload;
         },
-        addPrediction: (state, action:PayloadAction<any>) => {
+        addPrediction: (state, action:PayloadAction<Player>) => {
             state.data = [...state.data, action.payload];
         }
     }
 });
+
+//Export the actions so they can be used by useDispatch
+export const {setPredictions, addPrediction} = predictionSlice.actions;
 
 //Since authSlice is NOT a reducer BUT a slice, also have to export authSlice.reducer
 export default predictionSlice.reducer;

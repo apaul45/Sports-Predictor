@@ -29,6 +29,7 @@ export default class Player {
     async fetchStats(stats: any){
         let id = "";
         let info:{[key:string] : any} = {};
+
         //First get the player's id
         let options:any = {
             method: 'GET',
@@ -61,27 +62,31 @@ export default class Player {
                 }
             };
             await axios.request(options).then((response:any) => {
-                    //Filter out this list of stats using the player's id
-                    info = response.data.filter((player:any) =>
-                    player.player_id === id)[0];
+                //Filter out this list of stats using the player's id
+                info = response.data.filter((player:any) =>
+                player.player_id === id)[0];
 
-                    /* Finally, use the games played filter to 
-                    calculate ppg, rpg, etc */
+                /* Finally, use the games played filter to 
+                calculate ppg, rpg, etc */
+                
+                const gamesPlayed = info.gp;
+
+                perGame.forEach((stat:Array<string>) => { 
+                    info[stat[0]] =  info[stat[1]]/= gamesPlayed;
+                });
+                //Make sure info also includes a name field
+                info.name = this.info.name;
+
+                /* Instead of returning a value or setting this.info in 
+                    this method, send the value to a setter method that will 
+                    update this.info 
                     
-                    const gamesPlayed = info.gp;
+                    async await creates a Promise object, so trying to return a value 
+                    requires more knowledge of how promises work
+                */
 
-                    perGame.forEach((stat:Array<string>) => { 
-                        info[stat[0]] =  info[stat[1]]/= gamesPlayed;
-                    });
-                    /* Instead of returning a value or setting this.info in 
-                       this method, send the value to a setter method that will 
-                       update this.info 
-                       
-                       async await creates a Promise object, so trying to return a value 
-                       requires more knowledge of how promises work
-                       */
-                    this.setInfo(info);
-            })
+                this.setInfo(info);
+            });
         }
     }
 
@@ -172,12 +177,17 @@ export default class Player {
 
         this.predictStats();
     }
-
+    round(num:number){
+        var m = Number((Math.abs(num) * 100).toPrecision(15));
+        return Math.round(m) / 100 * Math.sign(num);
+    }
     predictStats(){
-        perGame.forEach((stat: any, index: number) => {
-           const newStat:number =  Number(this.info[stat[0]]) + Number(this.totalWeight/perGameWeights[index]);
-           this.info[stat[0]] = newStat;
-        }
+        perGame.forEach((stat: Array<string>, index: number) => {
+
+            const newStat:number =  this.round(Number(this.info[stat[0]]) + 
+                                    Number(this.totalWeight/perGameWeights[index]));
+            this.info[stat[0]] = newStat;
+          }
         );
 
         console.log(this.info);
@@ -186,6 +196,15 @@ export default class Player {
     getInfo(){
         console.log(this.info);
         return this.info;
+    }
+
+    toString(){
+        let playerString = this.info.name + ": ";
+
+        perGame.forEach((stat:Array<string>) => 
+            playerString += (this.info[stat[0]] + stat[0] + ", ")
+        );
+        return playerString;
     }
 
 }

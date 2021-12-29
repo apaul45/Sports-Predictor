@@ -35,9 +35,9 @@ export const authSlice = createSlice({
     }
 });
 
-//In order to update state variables in this slice, the actions
-//(ie, login, register, and logout) also have to be exported so they can
-//be used when appropriate
+/* In order to update state variables in this slice, the actions
+(ie, login, register, and logout) also have to be exported so they can
+be used when appropriate */
 export const {login, register, logout} = authSlice.actions;
 
 //Since authSlice is NOT a reducer BUT a slice, also have to export authSlice.reducer
