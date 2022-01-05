@@ -1,6 +1,4 @@
 import { Alert, Box, Button, Modal, Stack, styled } from "@mui/material"
-import { style } from "@mui/system"
-import { error } from "console"
 import { useAppDispatch, useAppSelector } from "../reduxHookTypes";
 import { setError } from "../slices/prediction";
 

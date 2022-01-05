@@ -66,26 +66,29 @@ export default class Player {
                 info = response.data.filter((player:any) =>
                 player.player_id === id)[0];
 
-                /* Finally, use the games played filter to 
-                calculate ppg, rpg, etc */
-                
-                const gamesPlayed = info.gp;
+                //If info exists, that means that the user entered both a correct name&team
+                if (info){
+                    /* Finally, use the games played filter to 
+                    calculate ppg, rpg, etc */
 
-                perGame.forEach((stat:Array<string>) => { 
-                    info[stat[0]] =  info[stat[1]]/= gamesPlayed;
-                });
-                //Make sure info also includes a name field
-                info.name = this.info.name;
+                    const gamesPlayed = info.gp;
 
-                /* Instead of returning a value or setting this.info in 
-                    this method, send the value to a setter method that will 
-                    update this.info 
-                    
-                    async await creates a Promise object, so trying to return a value 
-                    requires more knowledge of how promises work
-                */
+                    perGame.forEach((stat:Array<string>) => { 
+                        info[stat[0]] =  info[stat[1]]/= gamesPlayed;
+                    });
+                    //Make sure info also includes a name field
+                    info.name = this.info.name;
 
-                this.setInfo(info);
+                    /* Instead of returning a value or setting this.info in 
+                        this method, send the value to a setter method that will 
+                        update this.info 
+                        
+                        async await creates a Promise object, so trying to return a value 
+                        requires more knowledge of how promises work
+                    */
+
+                    this.setInfo(info);
+                }
             });
         }
     }

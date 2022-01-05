@@ -18,16 +18,16 @@ import playerGraph from '../classes/player-graph';
 import {useAppDispatch} from '../reduxHookTypes';
 import {addPrediction, setError} from '../slices/prediction';
 
-//This interface defines the types of props passed into the
-//shorter method and longer method components
+/* This interface defines the types of props passed into the
+shorter method and longer method components */
 export default interface Props{
     radioButtons : JSX.Element;
     handleSubmit: Function;
     methodCallback: Function;
 }
 
-//The 3 arrays below are used to create the radio buttons
 //The 4 arrays below represent each factor represented in the playerGraph
+//The first 3 below are used to create the radio buttons
 const playerRoleArray = ["Superstar", "Star", "All Star", "Role Player"];
 const teamStateArray = ["All Healthy", "Mostly Healthy", "Sometimes Healthy", "Rarely Healthy"];
 const futureStateArray = ["Amazing", "Good", "Decent", "Terrible"];
@@ -54,7 +54,7 @@ export default function PredictionScreen(){
 
     const navigate = useNavigate();
 
-    const methodButtons = 
+    const methodButtons:JSX.Element = 
         <>
             <Button
             onClick={() => navigate("/make-prediction/select")}
@@ -155,20 +155,26 @@ export default function PredictionScreen(){
                data fetched from the NBA stats api */
             if (!("gp" in formObject)) {
                 await newPlayer.fetchStats(formObject);
-                console.log(newPlayer.getInfo());
             }
-            newPlayer.predictionCalculator(radioValues, newGraph);
-            console.log(newPlayer.getInfo());
-    
-            //Add this prediction to the existing list of predictions
-            dispatch(addPrediction(newPlayer));
-    
-            //Return a div that will notify the user that the prediction was successful
-            const success:JSX.Element = <div className="fade-in" id="prediction-successful">
-                                            Prediction Successful! 
-                                            Return to the home page to view
-                                        </div>
-            setDisplay(success);
+            /* If the user didn't enter the right team then fetchStats won't
+            update this.info, meaning newPlayer's this.info won't have a ppg field */ 
+            if (!("ppg" in newPlayer.getInfo())){
+                dispatch(setError("Please enter the correct team for this player."));
+            }
+            else{
+                newPlayer.predictionCalculator(radioValues, newGraph);
+                console.log(newPlayer.getInfo());
+        
+                //Add this prediction to the existing list of predictions
+                dispatch(addPrediction(newPlayer));
+        
+                //Return a div that will notify the user that the prediction was successful
+                const success:JSX.Element = <div className="fade-in" id="prediction-successful">
+                                                Prediction Successful! 
+                                                Return to the home page to view
+                                            </div>
+                setDisplay(success);
+            }
         }
         catch(error:any){
             dispatch(setError("Prediction unsuccessful. Please recheck or enter valid information."));

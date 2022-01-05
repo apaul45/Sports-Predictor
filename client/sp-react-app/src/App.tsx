@@ -17,8 +17,6 @@ function App() {
     <BrowserRouter>
       <HomeWrapper/>
       <Routes>
-        {/* Provide the global store to all components 
-        by wrapping the provider around them */}
           <Route path="/about/" element={<AboutScreen/>}></Route>
           <Route path="/how_done/" element={<MethodScreen/>}></Route>
           <Route path="/make-prediction/select/" element={<SelectScreen/>}></Route>
