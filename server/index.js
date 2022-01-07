@@ -16,7 +16,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-const {typeDefs} = require("../server/graphql/typedefs/root-defs");
+const typeDefs = require("../server/graphql/typedefs/root-defs");
 const resolvers = require("../server/graphql/resolvers/root-resolvers");
 
 //Mongoose = ODM used w/ mongoDB 
@@ -37,7 +37,7 @@ const auth = require("./middleware/auth");
     transferred between the front end and backend-- Apollo is designed
     to handle graphQl on either side
 */
-const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 
 /*
     dotenv is used to load environment variables (ie, the site's 
@@ -45,6 +45,10 @@ const { ApolloServer, gql } = require('apollo-server-express');
     a .env file into process.env
 
     Install dotenv using the npm i dotenv command
+*/
+/*
+    DB_CONNECT is the url of the mongoDB database that mongoose will connect to. 
+    It is in the form of mongodb://127.0.0.1:27017/ + database_name
 */
 const {PORT, DB_CONNECT} = process.env;
 
@@ -75,20 +79,20 @@ const server = new ApolloServer({
     uploads: false,
 });
 
-/*
-    DB_CONNECT is the url of the mongoDB database that mongoose will connect to. 
-    It is in the form of mongodb://127.0.0.1:27017/ + database_name
-*/
+// In the newer version of apollo-server-express, the following setup is necessary 
+// to get the graphql server up and running
+//Docs: https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express
+const start = async(app, server) => { 
+    await server.start();
+    server.applyMiddleware({ app });
+    await new Promise(resolve => app.listen({ port: PORT }, resolve));
+    console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
+}
+start(app, server);
+
 mongoose
     .connect(DB_CONNECT, { useNewUrlParser: true })
-    .then(()=>{
-        app.listen(PORT, () => {
-            console.log("Express server running on port " + PORT);
-        });
-        server.listen().then(({ url }) => {
-            console.log(`YOUR API IS RUNNING AT: ${url} :)`);
-          });
-    })
+    .then(console.log("mongoose connected"))
     .catch(e => {
         console.error('Connection error', e.message)
     });

@@ -33,4 +33,4 @@ const userDefs = gql`
     }
 `;
 
-module.exports = {typedefs: userDefs};
+module.exports = userDefs;

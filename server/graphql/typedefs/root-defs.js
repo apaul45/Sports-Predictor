@@ -1,6 +1,6 @@
 const {gql} = require("apollo-server-express");
-const userDef = require("./user-defs").typeDefs;
-const predictionDef = require('./predictions-def').typeDefs;
+const userDef = require("./user-defs");
+const predictionDef = require('./predictions-def');
 
 /*
     In addition to extending the query and mutation types in the
@@ -21,6 +21,4 @@ const rootDef = gql`
   }
 `;
 
-module.exports = {
-	typeDefs: [rootDef, userDef, predictionDef],
-};  
+module.exports = [rootDef, userDef, predictionDef];  

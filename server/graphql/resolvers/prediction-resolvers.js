@@ -28,7 +28,8 @@ const predictionResolvers = {
         },
         getPredictionByFilter: async(_, {filter})=>{
             try{
-                const filteredPredictions = await Prediction.find(filter);
+
+                const filteredPredictions = await Predictions.find({stats:{name: filter}});
                 return filteredPredictions;
             }
             catch(err){ 

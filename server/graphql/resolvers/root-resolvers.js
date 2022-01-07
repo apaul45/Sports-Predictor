@@ -5,7 +5,10 @@
 // const resolversB = require('./resolversB');
 
 // module.exports = [resolversA, resolversB];
+const { merge } = require('lodash');
+
+const resolvers = {};
 const userResolvers = require("./user-resolvers");
 const predictionResolvers = require('./prediction-resolvers');
 
-module.exports = [userResolvers, predictionResolvers];
+module.exports = merge(resolvers, userResolvers, predictionResolvers);
