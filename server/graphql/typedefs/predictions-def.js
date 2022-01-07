@@ -25,15 +25,15 @@ const predictionDefs = gql`
     union ReturnValue = Prediction | ErrorMessage, 
 
     extend type Query{
-        getPrediction(id: String): ReturnValue!, 
-        getPredictionByFilter(filters:Array!): ReturnValue!, 
+        getPredictionById(id: String): ReturnValue!, 
+        getPredictionByFilter(filter:Object): [ReturnValue], 
         getAllPredictions: [ReturnValue!],
     }
 
     extend type Mutation{
         createPrediction(prediction: Prediction!): ReturnValue!,
-        setPrediction(id: String!, newPrediction:Prediction!): ReturnValue!, 
-        deletePrediction(id: String!): ReturnValue!
+        updatePrediction(prediction:Prediction!): ReturnValue!, 
+        deletePrediction(id: String!): String!
     }
 `;
 

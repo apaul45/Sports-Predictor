@@ -9,18 +9,22 @@ const bcrypt = require('bcryptjs');
 
 // the 2nd argument is args, which is an object containing all the
 // parameters defined in the typedefs 
-
 // the 3rd argument is context, which contains useful authentication
 // data (in this case, data passed from the auth middleware to context)
 const userResolvers = { 
-
-    Query:{
         // Since the auth middleware checks for a and returns a 
         // user id, the parent and args fields aren't needed here. 
         // Only req is needed so the context field can be destructured to {req}
-        getUser: async(_, _, {req})=>{
-            const user = await User.findOne(req.userId);
-            if (user) return user;
+    Query:{
+        getUser: async(_, __, {req})=>{
+            try{
+                const user = await User.findOne({_id: req.userId});
+                if (user) return user;
+                else return "No user found";
+            }
+            catch(err){
+                return "Not able to get this user";
+            }
         }
     },
 
@@ -28,7 +32,7 @@ const userResolvers = {
         // Since registerUser has to validate and generate a token for the newly
         // created user, registerUser needs the inputted fields by the user which
         // is in args, and req is needed to store that token in a cookie
-        registerUser: (_, args, {res}) => { 
+        registerUser: async(_, args, {res}) => { 
             try {
                 const {email, username, password, passwordVerify } = args;
                 if (!email || !username || !password || !passwordVerify) {
@@ -81,7 +85,7 @@ const userResolvers = {
             }
         },
 
-        loginUser: (_, args, {res})=>{
+        loginUser: async(_, args, {res})=>{
             try{
                 const{username, password} = args;
                 //Check if the username the user entered exists in the current database
@@ -107,7 +111,7 @@ const userResolvers = {
 
         //Since logoutUser only clears the cookie containing the user token, 
         //only res is needed as that is where the cookie is located
-        logoutUser: (_, _, {res})=> {
+        logoutUser: (_, __, {res})=> {
             try{
                 res.clearCookie("token");
                 return true;

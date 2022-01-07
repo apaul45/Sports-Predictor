@@ -16,6 +16,9 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
+const {typeDefs} = require("../server/graphql/typedefs/root-defs");
+const resolvers = require("../server/graphql/resolvers/root-resolvers");
+
 //Mongoose = ODM used w/ mongoDB 
 const mongoose = require('mongoose');
 
@@ -65,8 +68,11 @@ app.use(cookieParser());
 //Authentication middleware
 app.use(auth.verify);
 
-app.listen(PORT, () => {
-    console.log("Express server running on port " + PORT);
+const server = new ApolloServer({
+	typeDefs: typeDefs,
+	resolvers: resolvers,
+	context: ({ req, res }) => ({ req, res }),
+    uploads: false,
 });
 
 /*
@@ -75,6 +81,14 @@ app.listen(PORT, () => {
 */
 mongoose
     .connect(DB_CONNECT, { useNewUrlParser: true })
+    .then(()=>{
+        app.listen(PORT, () => {
+            console.log("Express server running on port " + PORT);
+        });
+        server.listen().then(({ url }) => {
+            console.log(`YOUR API IS RUNNING AT: ${url} :)`);
+          });
+    })
     .catch(e => {
         console.error('Connection error', e.message)
     });

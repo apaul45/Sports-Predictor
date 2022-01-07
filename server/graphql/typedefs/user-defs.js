@@ -23,7 +23,7 @@ const userDefs = gql`
     union ReturnValue = User | ErrorMessage, 
 
     extend type Query{
-        getUser(filter:String!): ReturnValue!
+        getUser: ReturnValue!
     }
 
     extend type Mutation{

@@ -1,6 +1,6 @@
 const {gql} = require("apollo-server-express");
-const userDef = require("../typedefs/user-defs").typeDefs;
-const predictionDef = require('../typedefs/predictions-defs').typeDefs;
+const userDef = require("./user-defs").typeDefs;
+const predictionDef = require('./predictions-def').typeDefs;
 
 /*
     In addition to extending the query and mutation types in the
