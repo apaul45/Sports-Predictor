@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import authReducer from './slices/auth';
 import predictionReducer from './slices/prediction';
+import {ApolloClient, InMemoryCache, ApolloProvider, HttpLink, from} from "@apollo/client";
 
 /*
   The redux toolkit simplifies setting up Redux. To set up Redux in 
@@ -27,11 +28,23 @@ const store = configureStore({
   },
 });
 
+/* 
+  Initialize Apollo Client with two fields: uri specifies the URL of the server, and 
+  cache is an instance of InMemoryCahce which caches queries after fetching them
+*/
+const client = new ApolloClient({
+  uri: 'https://localhost:4000/graphql',
+  cache: new InMemoryCache()
+});
+
+//Connect Redux and Apollo Client to React using the Provider and ApolloProvider tags respectfully
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

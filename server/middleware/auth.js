@@ -18,7 +18,7 @@ const verify = (req, res, next)=>{
             })
         }
 
-        const verified = jwt.verify(token, process.env.JWT_SECRET)
+        const verified = jwt.verify(token, JWT_SECRET)
         req.userId = verified.userId; //Send on the user info in req
     } 
     catch (err) {

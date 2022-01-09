@@ -23,7 +23,7 @@ const resolvers = require("../server/graphql/resolvers/root-resolvers");
 const mongoose = require('mongoose');
 
 //Authentication middleware
-const auth = require("./middleware/auth");
+const {verify, signToken} = require("./middleware/auth");
 
 /*
     apollo-server-express can be used instead of apollo-server in order 
@@ -55,7 +55,7 @@ const {PORT, DB_CONNECT} = process.env;
 const app = express();
 
 // SETUP THE MIDDLEWARE
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 //CORS for preventing xss attacks
 app.use(cors({
@@ -63,15 +63,20 @@ app.use(cors({
     credentials: true
 }));
 
+const corsPolicy = async (req, res, next) => {
+	console.log(req.headers.origin);
+	res.set("Access-Control-Allow-Origin", req.headers.origin);
+	next();
+};
+app.options("*", cors());
+app.use(corsPolicy);
 //Express.json to return responses in the form of json objects
 app.use(express.json());
 
 //cookieParser for storing/retrieving jwts in cookies
 app.use(cookieParser());
 
-//Authentication middleware
-app.use(auth.verify);
-
+app.use(verify);
 const server = new ApolloServer({
 	typeDefs: typeDefs,
 	resolvers: resolvers,
