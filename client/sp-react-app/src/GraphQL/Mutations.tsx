@@ -14,7 +14,14 @@ export const LOGIN_USER = gql`
 
 export const CREATE_PREDICTION = gql`
     mutation create_prediction($prediction: UserPrediction!){
-        createPrediction(prediction: $prediction)
+        createPrediction(prediction: $prediction){
+            username,
+            stats{
+                ppg,
+                apg,
+                name,
+            }
+        }
     }
 `;
 

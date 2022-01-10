@@ -1,5 +1,5 @@
 const User = require('../../models/user-model');
-const auth = require("../../middleware/auth");
+const auth = require("../../middleware");
 const bcrypt = require('bcryptjs');
 
 // Resolvers have 3 different types of arguments: 

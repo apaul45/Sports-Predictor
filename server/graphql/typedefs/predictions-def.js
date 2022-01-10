@@ -19,13 +19,15 @@ const FactorType = `
     fadrft: String!,
 `;
 const StatsType = `
-    ppg: Int!, 
-    rpg: Int!, 
-    apg: Int!, 
-    spg: Int!, 
-    bpg: Int!, 
-    weight: Int!,
-    gp: Int!,
+    ppg: Float!, 
+    rpg: Float!, 
+    apg: Float!, 
+    spg: Float!, 
+    bpg: Float!, 
+    team: String!,
+    gp: String!,
+    name: String!,
+    age: String!, 
 `;
 const predictionDefs = gql`
     type Stats{
@@ -47,27 +49,21 @@ const predictionDefs = gql`
         radioFactors: Factors
     },
     input UserPrediction{
-        id: ID, 
         username:String,
         stats: StatInput,
         radioFactors: FactorInput
     }
-    type ErrorMessage{
-        message: String, 
-    },
-
-    union ReturnValue = Prediction | ErrorMessage, 
 
     extend type Query{
-        getPredictionById(id: String): ReturnValue!, 
-        getPredictionByFilter(filter: String!): [ReturnValue], 
-        getAllPredictions: [ReturnValue!],
+        getPredictionById(id: String): Prediction, 
+        getPredictionByFilter(filter: String!): Prediction, 
+        getAllPredictions: [Prediction],
     }
 
     extend type Mutation{
-        createPrediction(prediction: UserPrediction!): ReturnValue!,
-        updatePrediction(prediction: UserPrediction!): ReturnValue!, 
-        deletePrediction(id: String!): String!
+        createPrediction(prediction: UserPrediction!): Prediction,
+        updatePrediction(prediction: UserPrediction!): Prediction, 
+        deletePrediction(id: String!): Prediction
     }
 `;
 

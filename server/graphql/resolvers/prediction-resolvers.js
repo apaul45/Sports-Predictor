@@ -15,6 +15,8 @@ const Prediction = require("../../models/prediction-model");
 
 // the 3rd argument is context, which contains useful authentication
 // data (in this case, data passed from the auth middleware to context)
+
+//Make sure to check for a valid user token in all mutations and certain queries
 const predictionResolvers = {
     Query: { 
         getPredictionById : async(_, {id})=>{
@@ -22,8 +24,8 @@ const predictionResolvers = {
                 const prediction = await Prediction.findById({_id: id});
                 return prediction;
             }
-            catch(err){ 
-                return "Prediction retrieval failed."
+            catch{ 
+                return null;
             }
         },
         getPredictionByFilter: async(_, {filter})=>{
@@ -33,7 +35,7 @@ const predictionResolvers = {
                 return filteredPredictions;
             }
             catch(err){ 
-                return "Filter was unsuccessful.";
+                return null;
             }
         },
         getAllPredictions: async() => {
@@ -41,41 +43,45 @@ const predictionResolvers = {
                 const lists = await Prediction.find({});
                 return lists;
             }
-            catch(err){
-                return "Retrieval of all predictions failed."
+            catch{
+                return null;
             }
         }
     },
     
     Mutation: { 
-        createPrediction: async(_, {prediction}) =>{
+        createPrediction: async(_, {prediction}, {req}) =>{
             try{
+                if (!req.userId) return null;
                 const newPrediction = new Prediction(prediction);
                 await newPrediction.save();
+                return newPrediction;
             }
-            catch(err){ 
-                return "Prediction not successfully created."
+            catch{ 
+                return null;
             }
         },
-        updatePrediction: async(_, {prediction}) => {
+        updatePrediction: async(_, {prediction}, {req}) => {
             // Going to use the findOneandUpdate commadrather than the updateOne 
             // command to update this prediction as it returns the updated prediction
             try{
+                if (!req.userId) return null;
                 const id = prediction._id;
                 const updatedPrediction = await Prediction.findOneAndUpdate({id},{prediction});
                 return updatedPrediction;
             }
-            catch(err){
-                return "Prediction was not successfully updated."
+            catch{
+                return null;
             }
         },
-        deletePrediction: async(_, {id})=>{
+        deletePrediction: async(_, {id}, {req})=>{
             try{
+                if (!req.userId) return null;
                 await Prediction.findOneAndDelete({_id: id});
                 return "Prediction was successfully deleted."
             }
-            catch(err){
-                return "Prediction not able to be deleted"
+            catch{
+                return null;
             }
         }
     }

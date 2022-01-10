@@ -2,8 +2,8 @@
     After connecting to the mongoDB database via mongoose.connect, 
     a collection is made in this database whenever a model is defined
 */
-const {model, Schema} = require('mongoose')
-const ObjectId = Schema.Types.ObjectId;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 /*
     Predictions contain 4 things:
     1. Their mongoDb generated id
@@ -13,7 +13,6 @@ const ObjectId = Schema.Types.ObjectId;
 */
 const PredictionSchema = new Schema(
     {
-        _id: {type: ObjectId, required: true},
         username: {type: String, required: true},
         stats: {type: Object, required: true},
         radioFactors: {type: Object, required:true},
@@ -24,4 +23,4 @@ const PredictionSchema = new Schema(
 /* When the Prediction collection is made, mongoose automatically 
    makes the collection name lowercase and adds a "s" at the end.
    Hence, the collection name will be "predictions" */
-module.exports = model('Prediction', PredictionSchema);
+module.exports = mongoose.model('Prediction', PredictionSchema);

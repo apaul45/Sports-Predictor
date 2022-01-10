@@ -33,8 +33,11 @@ const store = configureStore({
   cache is an instance of InMemoryCahce which caches queries after fetching them
 */
 const client = new ApolloClient({
-  uri: 'https://localhost:4000/graphql',
-  cache: new InMemoryCache()
+  uri: 'http://localhost:4000/graphql',
+  cache: new InMemoryCache(),
+  // Credentials: include is necessary to pass along the auth cookies with each server request
+	credentials: "include",
+
 });
 
 //Connect Redux and Apollo Client to React using the Provider and ApolloProvider tags respectfully

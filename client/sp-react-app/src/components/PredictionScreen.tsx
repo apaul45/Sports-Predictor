@@ -17,6 +17,8 @@ import Player from '../classes/player-model';
 import playerGraph from '../classes/player-graph';
 import {useAppDispatch} from '../reduxHookTypes';
 import {addPrediction, setError} from '../slices/prediction';
+import { CREATE_PREDICTION } from '../GraphQL/Mutations';
+import {useMutation} from '@apollo/client';
 
 /* This interface defines the types of props passed into the
 shorter method and longer method components */
@@ -49,6 +51,8 @@ newGraph.constructGraph(playerRoleArray, teamArray, teamStateArray,
                 futureStateArray, startingWeights, subtractValues)
 
 export default function PredictionScreen(){
+    const [addPrediction, {data}] = useMutation(CREATE_PREDICTION);
+
     //Make sure to update the list of predictions once a prediction is calculated
     const dispatch = useAppDispatch();
 
@@ -165,15 +169,23 @@ export default function PredictionScreen(){
                 newPlayer.predictionCalculator(radioValues, newGraph);
                 console.log(newPlayer.getInfo());
         
-                //Add this prediction to the existing list of predictions
-                dispatch(addPrediction(newPlayer));
-        
                 //Return a div that will notify the user that the prediction was successful
                 const success:JSX.Element = <div className="fade-in" id="prediction-successful">
                                                 Prediction Successful! 
                                                 Return to the home page to view
                                             </div>
                 setDisplay(success);
+
+                const predictionObject = {
+                    username: "apaul421", 
+                    stats: newPlayer.getInfo(), 
+                    radioFactors: radioValues
+                }
+
+                //When calling a graphql mutation funciton, the syntax is:
+                //(functionName)({variables: {(parameter name)}: ...})
+                addPrediction({variables: {prediction: predictionObject}});
+
             }
         }
         catch(error:any){

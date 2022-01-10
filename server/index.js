@@ -14,7 +14,6 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
 
 const typeDefs = require("../server/graphql/typedefs/root-defs");
 const resolvers = require("../server/graphql/resolvers/root-resolvers");
@@ -23,7 +22,7 @@ const resolvers = require("../server/graphql/resolvers/root-resolvers");
 const mongoose = require('mongoose');
 
 //Authentication middleware
-const {verify, signToken} = require("./middleware/auth");
+const {expressMiddleware, signToken} = require("./middleware");
 
 /*
     apollo-server-express can be used instead of apollo-server in order 
@@ -55,32 +54,21 @@ const {PORT, DB_CONNECT} = process.env;
 const app = express();
 
 // SETUP THE MIDDLEWARE
-app.use(express.urlencoded({ extended: false }));
+expressMiddleware(app);
 
-//CORS for preventing xss attacks
-app.use(cors({
-    origin: ["http://localhost:3000"],
+const corsOptions = {
+    origin: "http://localhost:3000",
     credentials: true
-}));
-
-const corsPolicy = async (req, res, next) => {
-	console.log(req.headers.origin);
-	res.set("Access-Control-Allow-Origin", req.headers.origin);
-	next();
 };
-app.options("*", cors());
-app.use(corsPolicy);
-//Express.json to return responses in the form of json objects
-app.use(express.json());
 
-//cookieParser for storing/retrieving jwts in cookies
-app.use(cookieParser());
-
-app.use(verify);
+/*
+    The context argument passes along authentication info 
+    to be used in resolver functions
+*/
 const server = new ApolloServer({
 	typeDefs: typeDefs,
 	resolvers: resolvers,
-	context: ({ req, res }) => ({ req, res }),
+	context: ({ req, res }) => ({req, res}),
     uploads: false,
 });
 
@@ -89,14 +77,17 @@ const server = new ApolloServer({
 //Docs: https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express
 const start = async(app, server) => { 
     await server.start();
-    server.applyMiddleware({ app });
-    await new Promise(resolve => app.listen({ port: PORT }, resolve));
+    server.applyMiddleware({app, cors: corsOptions });
+    app.listen({ port: PORT }, () => {
+        console.log(`Server ready at ` + PORT);
+    });
     console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
 }
 start(app, server);
 
 mongoose
-    .connect(DB_CONNECT, { useNewUrlParser: true })
+    .connect(DB_CONNECT, { useNewUrlParser: true,
+                        useUnifiedTopology: true })
     .then(console.log("mongoose connected"))
     .catch(e => {
         console.error('Connection error', e.message)

@@ -9,7 +9,7 @@ import {gql} from '@apollo/client';
     For a field with multiple output types (ie, field has a union return type),
     the data to be used from each type can be defined using the following syntax:
 
-    --typename
+    __typename
     ... on (One return type){
         (fields in this return type)
     }
@@ -22,15 +22,7 @@ import {gql} from '@apollo/client';
 export const GET_USER = gql`
     query getCurrentUser{
         getUser{
-            --typename 
-            ... on User{
-                _id
-                username
-                email
-            }
-            ... on ErrorMessage{
-                message
-            }
+            username
         }
     }
 `;
@@ -38,16 +30,8 @@ export const GET_USER = gql`
 export const GET_PREDICTION_ID = gql`
     query getPredictionById($id: ID){
         getPredictionById(id: $id){
-            --typename
-            ... on Prediction{
-                id, 
-                username, 
-                stats, 
-                radioFactors
-            }
-            ... on ErrorMessage{
-                message
-            }
+            _id, 
+            username,
         }
     }
 `;
@@ -55,16 +39,8 @@ export const GET_PREDICTION_ID = gql`
 export const GET_PREDICTION_FILTER = gql`
     query getPredictionByFilter($filter: String){
         getPredictionById(filter: $filter){
-            --typename
-            ... on Prediction{
-                id, 
-                username, 
-                stats, 
-                radioFactors
-            }
-            ... on ErrorMessage{
-                message
-            }
+            _id, 
+            username,
         }
     }
 `;
@@ -72,15 +48,12 @@ export const GET_PREDICTION_FILTER = gql`
 export const GET_ALL_PREDICTIONS = gql`
     query getAllPredictions{ 
         getAllPredictions{
-            --typename
-            ... on Prediction{
-                id, 
-                username, 
-                stats, 
-                radioFactors
-            }
-            ... on ErrorMessage{
-                message
+            username,
+            stats{
+                ppg,
+                rpg, 
+                name, 
+                team
             }
         }
     }
