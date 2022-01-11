@@ -4,7 +4,7 @@
     send back custom responses to the front end
 */
 const Prediction = require("../../models/prediction-model");
-
+const ObjectId = require('mongoose').Types.ObjectId;
 // Resolvers have 3 different types of arguments: 
 // the 1st argument is the parent field, which can
 // be used to link different types together or retrieve and use
@@ -21,7 +21,7 @@ const predictionResolvers = {
     Query: { 
         getPredictionById : async(_, {id})=>{
             try{
-                const prediction = await Prediction.findById({_id: id});
+                const prediction = await Prediction.findById({_id: new ObjectId(id)});
                 return prediction;
             }
             catch{ 
@@ -52,7 +52,7 @@ const predictionResolvers = {
     Mutation: { 
         createPrediction: async(_, {prediction}, {req}) =>{
             try{
-                if (!req.userId) return null;
+                // if (!req.userId) return null;
                 const newPrediction = new Prediction(prediction);
                 await newPrediction.save();
                 return newPrediction;

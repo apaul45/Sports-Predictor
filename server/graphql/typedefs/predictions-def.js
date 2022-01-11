@@ -43,7 +43,7 @@ const predictionDefs = gql`
         ${FactorType}
     }
     type Prediction{
-        id: ID, 
+        _id: ID, 
         username:String,
         stats: Stats,
         radioFactors: Factors

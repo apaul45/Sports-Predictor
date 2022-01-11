@@ -1,9 +1,10 @@
 /*
     This file contains all the queries to be made on the client side of the app. 
     To use a query in a component, the query must be imported in this file and 
-    then specified as a parameter to the useQuery hook
+    then specified as a parameter to the request function from the graphql request
+    library
 */
-import {gql} from '@apollo/client';
+import {gql} from 'graphql-request';
 
 /*
     For a field with multiple output types (ie, field has a union return type),
@@ -32,6 +33,15 @@ export const GET_PREDICTION_ID = gql`
         getPredictionById(id: $id){
             _id, 
             username,
+            stats{
+                ppg,
+                rpg, 
+                apg, 
+                bpg, 
+                spg, 
+                name, 
+                team
+            }
         }
     }
 `;
@@ -41,6 +51,15 @@ export const GET_PREDICTION_FILTER = gql`
         getPredictionById(filter: $filter){
             _id, 
             username,
+            stats{
+                ppg,
+                rpg, 
+                apg, 
+                bpg, 
+                spg, 
+                name, 
+                team
+            }
         }
     }
 `;
@@ -48,10 +67,14 @@ export const GET_PREDICTION_FILTER = gql`
 export const GET_ALL_PREDICTIONS = gql`
     query getAllPredictions{ 
         getAllPredictions{
+            _id, 
             username,
             stats{
                 ppg,
                 rpg, 
+                apg, 
+                bpg, 
+                spg, 
                 name, 
                 team
             }
