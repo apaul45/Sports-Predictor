@@ -16,10 +16,18 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Player from '../classes/player-model';
 import playerGraph from '../classes/player-graph';
 import {useAppDispatch} from '../reduxHookTypes';
-import {addPrediction, setError} from '../slices/prediction';
-import { CREATE_PREDICTION } from '../GraphQL/Mutations';
-import {useMutation} from '@apollo/client';
+import {addPrediction, setError, fetchPredictions} from '../slices/prediction';
 
+import { 
+    CREATE_PREDICTION,
+    UPDATE_PREDICTION, 
+    DELETE_PREDICTION
+} from "../GraphQL/Mutations";
+import { GET_USER, 
+    GET_PREDICTION_FILTER ,
+    GET_PREDICTION_ID ,
+    GET_ALL_PREDICTIONS
+} from '../GraphQL/Queries';
 /* This interface defines the types of props passed into the
 shorter method and longer method components */
 export default interface Props{
@@ -51,7 +59,6 @@ newGraph.constructGraph(playerRoleArray, teamArray, teamStateArray,
                 futureStateArray, startingWeights, subtractValues)
 
 export default function PredictionScreen(){
-    const [addPrediction, {data}] = useMutation(CREATE_PREDICTION);
 
     //Make sure to update the list of predictions once a prediction is calculated
     const dispatch = useAppDispatch();
@@ -176,16 +183,16 @@ export default function PredictionScreen(){
                                             </div>
                 setDisplay(success);
 
-                const predictionObject = {
+                //Finally, add the prediction to the database and state, which the dispatch takes care of
+                //Make sure to use the same parameter name as defined by 
+                let prediction = {prediction:{
                     username: "apaul421", 
                     stats: newPlayer.getInfo(), 
-                    radioFactors: radioValues
+                    radioFactors: radioValues,
                 }
+                };
 
-                //When calling a graphql mutation funciton, the syntax is:
-                //(functionName)({variables: {(parameter name)}: ...})
-                addPrediction({variables: {prediction: predictionObject}});
-
+                dispatch(fetchPredictions(addPrediction, CREATE_PREDICTION, prediction));
             }
         }
         catch(error:any){

@@ -1,27 +1,19 @@
-import { useQuery } from '@apollo/client';
 import { ListItem } from '@material-ui/core';
 import { List } from '@mui/material';
-import { useEffect, useState } from 'react';
-import Player from '../classes/player-model';
-import {GET_ALL_PREDICTIONS} from '../GraphQL/Queries';
-export default function ViewPredictions(){
+import {useAppSelector} from '../reduxHookTypes';
 
-    const { error, loading, data } = useQuery(GET_ALL_PREDICTIONS);
-    const [predictions, setPredictions] = useState([]);
-    useEffect(() => {
-      if (data) {
-        setPredictions(data.getAllPredictions);
-      }
-    }, [data]);
+export default function ViewPredictions(){
+    let predictionList:Array<any> = useAppSelector((state) => state.predictions.data);
+
     return (
         <div className="screen-style">
             <div className="child-screen-style centering">
                 <List>
                 {
-                    predictions.map((prediction: any) => 
+                    predictionList.map((prediction: any) => 
                         <>
                             <ListItem>
-                                {prediction.stats.ppg}
+                                {prediction.stats.name}
                             </ListItem><br/>
                         </>
                     )
