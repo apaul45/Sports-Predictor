@@ -11,42 +11,39 @@ const jwt = require("jsonwebtoken");
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-const expressMiddleware = (app) =>{ 
-    app.use(express.urlencoded({ extended: false }));
-
-    //CORS for preventing xss attacks
-    app.use(cors({
-        origin: ["http://localhost:3000"],
-        credentials: true
-    }));
-    app.options("*", cors());
-    app.use(corsPolicy);
-    //Express.json to return responses in the form of json objects
-    app.use(express.json());
-
-    //cookieParser for storing/retrieving jwts in cookies
-    app.use(cookieParser());
-
-    app.use(verify);
-}
-
 const corsPolicy = async (req, res, next) => {
 	console.log(req.headers.origin);
+    res.set("Access-Control-Allow-Credentials", true);
 	res.set("Access-Control-Allow-Origin", req.headers.origin);
 	next();
 };
 
+const expressMiddleware = (app, corsOptions) =>{ 
+    //cookieParser for storing/retrieving jwts in cookies
+    app.use(cookieParser());
+    app.use(express.urlencoded({ extended: false }));
+
+    //CORS for preventing xss attacks
+    app.use(cors(corsOptions));
+    app.use(corsPolicy);
+    //Express.json to return responses in the form of json objects
+    app.use(express.json());
+    app.use(verify);
+}
+
 //verify() employs the principle of complete mediation: serves as auth middleware for every request
 const verify = (req, res, next)=>{
     try {
-        const token = req.cookies.token;
+        const token = req.cookies["token"];
         //If there is no token (null), then return failure status
         if (!token) {
             console.log("make an account motherfucker");
         }
         else{
-            const verified = jwt.verify(token, JWT_SECRET)
+            console.log("shits working?");
+            const verified = jwt.verify(token, JWT_SECRET);
             req.userId = verified.userId; //Send on the user info in req
+            console.log(req.userId);
         }
     } 
     catch (err) {

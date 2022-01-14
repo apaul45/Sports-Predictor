@@ -17,17 +17,12 @@ import Player from '../classes/player-model';
 import playerGraph from '../classes/player-graph';
 import {useAppDispatch} from '../reduxHookTypes';
 import {addPrediction, setError, fetchPredictions} from '../slices/prediction';
-
+import {fetchUsers} from '../slices/auth';
+import {login} from '../slices/auth';
 import { 
     CREATE_PREDICTION,
-    UPDATE_PREDICTION, 
-    DELETE_PREDICTION
 } from "../GraphQL/Mutations";
-import { GET_USER, 
-    GET_PREDICTION_FILTER ,
-    GET_PREDICTION_ID ,
-    GET_ALL_PREDICTIONS
-} from '../GraphQL/Queries';
+
 /* This interface defines the types of props passed into the
 shorter method and longer method components */
 export default interface Props{

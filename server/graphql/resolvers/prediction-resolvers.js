@@ -52,7 +52,6 @@ const predictionResolvers = {
     Mutation: { 
         createPrediction: async(_, {prediction}, {req}) =>{
             try{
-                // if (!req.userId) return null;
                 const newPrediction = new Prediction(prediction);
                 await newPrediction.save();
                 return newPrediction;
@@ -65,7 +64,6 @@ const predictionResolvers = {
             // Going to use the findOneandUpdate commadrather than the updateOne 
             // command to update this prediction as it returns the updated prediction
             try{
-                if (!req.userId) return null;
                 const id = prediction._id;
                 const updatedPrediction = await Prediction.findOneAndUpdate({id},{prediction});
                 return updatedPrediction;
@@ -74,11 +72,10 @@ const predictionResolvers = {
                 return null;
             }
         },
-        deletePrediction: async(_, {id}, {req})=>{
+        deletePrediction: async(_, {id})=>{
             try{
-                if (!req.userId) return null;
-                await Prediction.findOneAndDelete({_id: id});
-                return "Prediction was successfully deleted."
+                const prediction = await Prediction.findByIdAndDelete({"_id": new ObjectId(id)});
+                return prediction;
             }
             catch{
                 return null;

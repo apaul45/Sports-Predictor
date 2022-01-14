@@ -53,13 +53,12 @@ const {PORT, DB_CONNECT} = process.env;
 
 const app = express();
 
-// SETUP THE MIDDLEWARE
-expressMiddleware(app);
-
 const corsOptions = {
     origin: "http://localhost:3000",
     credentials: true
 };
+// SETUP THE MIDDLEWARE
+expressMiddleware(app, corsOptions);
 
 /*
     The context argument passes along authentication info 
@@ -70,6 +69,7 @@ const server = new ApolloServer({
 	resolvers: resolvers,
 	context: ({ req, res }) => ({req, res}),
     uploads: false,
+    cors: false,
 });
 
 // In the newer version of apollo-server-express, the following setup is necessary 
@@ -77,7 +77,7 @@ const server = new ApolloServer({
 //Docs: https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express
 const start = async(app, server) => { 
     await server.start();
-    server.applyMiddleware({app, cors: corsOptions });
+    server.applyMiddleware({app, cors: false });
     app.listen({ port: PORT }, () => {
         console.log(`Server ready at ` + PORT);
     });

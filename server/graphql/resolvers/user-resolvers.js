@@ -1,5 +1,5 @@
 const User = require('../../models/user-model');
-const auth = require("../../middleware");
+const {signToken} = require("../../middleware");
 const bcrypt = require('bcryptjs');
 
 // Resolvers have 3 different types of arguments: 
@@ -20,7 +20,7 @@ const userResolvers = {
             try{
                 const user = await User.findOne({_id: req.userId});
                 if (user) return user;
-                else return "No user found";
+                else return null;
             }
             catch(err){
                 return "Not able to get this user";
@@ -74,14 +74,15 @@ const userResolvers = {
                 const savedUser = await newUser.save();
         
                 // LOGIN THE USER
-                const token = auth.signToken(savedUser);
+                const token = signToken(savedUser);
         
                 //Save generated jwt in a cookie
-                res.cookie("token", token, { httpOnly: true });
+                await res.cookie("token", token, { httpOnly: true, secure: true,
+                    sameSite: "none" });
 
                 return newUser;
             } catch (err) {
-                return "Register not successful. Please try again.";
+                return null;
             }
         },
 
@@ -91,21 +92,26 @@ const userResolvers = {
                 //Check if the username the user entered exists in the current database
                 const existingUser = await User.findOne({ username: username });
                 if (!existingUser) {
-                    return "Wrong username or password.";
+                    console.log("Wrong username or password.");
+                    return null;
                 }
+                console.log(existingUser);
                 //Use bcrypt to check if the entered password matches the hashed one
                 const correctPass = await bcrypt.compare(password, existingUser.passwordHash);
                 if (!correctPass){
-                    return "Wrong email or password.";
+                    console.log("Wrong username or password.");
+                    return null;
                 }
                 //Log the user in by signing a jwt web token
-                const token = auth.signToken(existingUser);
+                const token = signToken(existingUser);
 
                 //Save generated jwt in a cookie
-                res.cookie("token", token, { httpOnly: true });
+                await res.cookie("token", token, { httpOnly: true, secure: true,
+                    sameSite: "none" });
+                return existingUser;
             } 
             catch(err){
-                return "Login not successful. Please try again.";
+                return null;
             }
         },
 

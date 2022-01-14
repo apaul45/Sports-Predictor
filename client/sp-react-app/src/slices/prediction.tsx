@@ -13,11 +13,15 @@
 
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import { GraphQLClient } from 'graphql-request';
+require('fetch-cookie/node-fetch')(require('node-fetch'));
+
 
 const endpoint = "http://localhost:4000/graphql";
 
 //This graphql client instance will be used to send requests
-const client = new GraphQLClient(endpoint, { headers: {} })
+const client = new GraphQLClient(endpoint, { headers: { 
+    authorization: "Bearer token",
+  }});
 
 
 interface PredictionState{ 
@@ -37,7 +41,8 @@ export const predictionSlice = createSlice({
         },
         addPrediction: (state, action:PayloadAction<any>) => {
             //As executeRequest returns a Promise object, .then must be used to retrieve the payload
-            state.data = [...state.data, action.payload.createPrediction];
+            console.log("prediction being added");
+            state.data.push(action.payload.createPrediction);
             console.log(state.data);            
         },
         deletePrediction: (state, action:PayloadAction<any>) => {

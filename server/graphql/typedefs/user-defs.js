@@ -16,20 +16,14 @@ const userDefs = gql`
         email: String, 
         passwordHash: String
     }
-    type ErrorMessage{
-        message: String, 
-    },
-
-    union ReturnValue = User | ErrorMessage, 
-
     extend type Query{
-        getUser: ReturnValue!
+        getUser: User
     }
 
     extend type Mutation{
-        registerUser(email: String!, username: String!, password: String!, passwordVerify: String!): ReturnValue!,
-        loginUser(username:String!, password: String!): ReturnValue!, 
-        logoutUser: Boolean!
+        registerUser(email: String!, username: String!, password: String!, passwordVerify: String!): User,
+        loginUser(username:String!, password: String!): User, 
+        logoutUser: Boolean
     }
 `;
 

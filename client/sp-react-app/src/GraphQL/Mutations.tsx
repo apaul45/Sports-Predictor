@@ -16,6 +16,13 @@ export const LOGIN_USER = gql`
     }
 `;
 
+export const LOGOUT_USER = gql`
+    mutation logout_user{
+        logoutUser(){
+        }
+    }
+`;
+
 export const CREATE_PREDICTION = gql`
     mutation create_prediction($prediction: UserPrediction!){
         createPrediction(prediction: $prediction){
@@ -24,7 +31,11 @@ export const CREATE_PREDICTION = gql`
             stats{
                 ppg,
                 apg,
-                name,
+                rpg, 
+                spg, 
+                bpg, 
+                team
+                name
             }
         }
     }
@@ -51,17 +62,7 @@ export const UPDATE_PREDICTION = gql`
 export const DELETE_PREDICTION = gql`
     mutation delete_prediction($id: String!){
         deletePrediction(id: $id){
-            _id, 
-            username,
-            stats{
-                ppg,
-                rpg, 
-                apg, 
-                bpg, 
-                spg, 
-                name, 
-                team
-            }
+            _id
         }
     }
 `;
