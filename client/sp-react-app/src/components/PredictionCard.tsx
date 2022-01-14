@@ -4,7 +4,7 @@ import {useAppDispatch} from '../reduxHookTypes';
 import {DELETE_PREDICTION} from "../GraphQL/Mutations";
 import {deletePrediction, fetchPredictions} from "../slices/prediction";
 
-const PredictionCard = ({prediction} : any) =>{
+const PredictionCard = ({prediction} : any) => {
 
     const dispatch = useAppDispatch();
 
@@ -22,7 +22,7 @@ const PredictionCard = ({prediction} : any) =>{
                 <div className="centering prediction-card">
                     {prediction.stats.name + ", " + prediction.stats.team}
                     <IconButton
-                    onClick={() => dispatch(fetchPredictions(deletePrediction, DELETE_PREDICTION, prediction._id))}>
+                    onClick={() => dispatch(fetchPredictions(deletePrediction, DELETE_PREDICTION, {id:prediction._id}))}>
                         <DeleteOutlineOutlinedIcon>    
                         </DeleteOutlineOutlinedIcon>
                     </IconButton>
@@ -42,8 +42,8 @@ const PredictionCard = ({prediction} : any) =>{
                         )
                     }
             </CardContent>
-    </StyledCard>
-    )
+        </StyledCard>
+    );
 }
 
 export default PredictionCard;

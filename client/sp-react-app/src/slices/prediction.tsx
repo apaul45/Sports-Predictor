@@ -27,17 +27,18 @@ const client = new GraphQLClient(endpoint, { headers: {
 interface PredictionState{ 
     data: any, 
     errorMessage: string,
+    searchField : string
 }
 
-const initialState:PredictionState = {data: [], errorMessage: ""};
+const initialState:PredictionState = {data: [], errorMessage: "", searchField: ""};
 
 export const predictionSlice = createSlice({
     name: "predictions-data",
     initialState: initialState,
     reducers: {
         setPredictions: (state, action:PayloadAction<any>) => {
-            state.data = action.payload.getAllPredictions;
-            console.log(state.data);
+                state.data = action.payload.getAllPredictions;
+                console.log(state.data);
         },
         addPrediction: (state, action:PayloadAction<any>) => {
             //As executeRequest returns a Promise object, .then must be used to retrieve the payload
@@ -54,12 +55,15 @@ export const predictionSlice = createSlice({
         },
         setError: (state, action: PayloadAction<string>) => {
             state.errorMessage = action.payload;
+        },
+        setSearchField: (state, action: PayloadAction<string>)=>{
+            state.searchField = action.payload;
         }
     }
 });
 
 //Export the actions so they can be used by useDispatch
-export const {setPredictions, addPrediction, setError, deletePrediction} = predictionSlice.actions;
+export const {setPredictions, addPrediction, setError, deletePrediction, setSearchField} = predictionSlice.actions;
 
 //Since authSlice is NOT a reducer BUT a slice, also have to export authSlice.reducer
 export default predictionSlice.reducer;
