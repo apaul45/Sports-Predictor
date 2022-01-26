@@ -1,4 +1,4 @@
-import {List, TextField} from '@mui/material';
+import {Grid, List, TextField} from '@mui/material';
 import {useAppSelector, useAppDispatch} from '../reduxHookTypes';
 import PredictionCard from './PredictionCard';
 import {setSearchField} from '../slices/prediction';
@@ -21,20 +21,24 @@ export default function ViewPredictions(){
     return (
         <div className="screen-style">
             <div className="child-screen-style">
-
+                <br/>
                 <div className="centering">
                     <TextField onChange={(event) => handleTextChange(event)}
                     label="Enter player name">
                     </TextField>
                 </div>
-
-                <List style={{maxHeight: '70%', overflow: 'auto'}}  
-                sx={{ width: '96.8%', left: '35%'}}>
-                {
-                    predictionList.map((prediction: any) => 
-                        <PredictionCard prediction={prediction} />
-                    )
-                }
+                <br/>
+                <List style={{maxHeight: '70%', overflow: 'auto'}}>
+                    <Grid container spacing={2}
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="center">
+                        {
+                            predictionList.map((prediction: any) => 
+                                <PredictionCard prediction={prediction} />
+                            )
+                        }
+                    </Grid>
                 </List>
 
             </div>

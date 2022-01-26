@@ -63,7 +63,7 @@ const predictionDefs = gql`
     extend type Mutation{
         createPrediction(prediction: UserPrediction!): Prediction,
         updatePrediction(prediction: UserPrediction!): Prediction, 
-        deletePrediction(id: String!): String
+        deletePrediction(id: String!): Prediction
     }
 `;
 

@@ -68,17 +68,21 @@ export default class Player {
 
                 //If info exists, that means that the user entered both a correct name&team
                 if (info){
+                    console.log(info);
                     /* Finally, use the games played filter to 
-                    calculate ppg, rpg, etc */
+                    calculate ppg, rpg, etc, and create a stats object
+                    to set this player's info to */
 
-                    const gamesPlayed = info.gp;
+                    let stats:any = {};
 
                     perGame.forEach((stat:Array<string>) => { 
-                        info[stat[0]] =  info[stat[1]]/= gamesPlayed;
+                        stats[stat[0]] =  info[stat[1]]/= info.gp;
                     });
-                    //Make sure info also includes a name field
-                    info.name = this.info.name;
-
+                    //Make sure info also includes a name, team, and gp field
+                    stats.name = this.info.name;
+                    stats.team = this.info.team;
+                    stats.gp = String(info.gp);
+                    stats.age = String(info.player_age);
                     /* Instead of returning a value or setting this.info in 
                         this method, send the value to a setter method that will 
                         update this.info 
@@ -87,7 +91,7 @@ export default class Player {
                         requires more knowledge of how promises work
                     */
 
-                    this.setInfo(info);
+                    this.setInfo(stats);
                 }
             });
         }

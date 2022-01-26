@@ -76,7 +76,7 @@ function ShorterMethod({radioButtons, handleSubmit, methodCallback} : Props){
        which means an xs of 6 would allow for 6 columns
        with 2 in each row. 
 
-       In this case, the xs is 3 to allow for 3 columns with 1 item
+       In this case, the xs is 2 to allow for 2 columns with 1 item
        in each row
     */
     const textfields = array.map(entry => 

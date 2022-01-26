@@ -15,6 +15,7 @@ const corsPolicy = async (req, res, next) => {
 	console.log(req.headers.origin);
     res.set("Access-Control-Allow-Credentials", true);
 	res.set("Access-Control-Allow-Origin", req.headers.origin);
+    res.set("Access-Control-Allow-Headers", req.headers);
 	next();
 };
 
