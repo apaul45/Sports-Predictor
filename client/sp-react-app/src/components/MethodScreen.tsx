@@ -2,13 +2,13 @@ export default function MethodScreen(){
     return(
         <div id="How" className='screen-style'>
             <div className='child-screen-style'>
-
                 <h1 className='centering'>How It's Done</h1>
                 <hr></hr>
-                <p style={{fontSize:'20pt', marginLeft:'2%'}}>Future stats are determined by a variety of factors, some of which are:
+                <p style={{fontSize:'20pt'}} className="about-select">
+                    Future stats are determined by the following factors:
                     <ul>
                         <li>Player's Age (Are they entering a prime? Leaving? In it?)</li>
-                        <li>Current state of their team (Is their team losing? The more they are, the more that player gets to shine</li>
+                        <li>Current state of their team (Is their team losing? Winning? Mediocre?)</li>
                         <li>Future state of their team (Any free agent moves? Big draft picks?)</li>
                         <li>Player's Role (Is this player expected to be the #1 option? Perhaps a role player?)</li>
                     </ul>
@@ -25,7 +25,7 @@ export default function MethodScreen(){
                     Whereas one coach may draw up different gameplans and adjust during the game, another may rarely do so.
                     This can cause fluctuations in a player's role, as it can change from night to night and/or with coaching changes.
                     <br/><br/>
-                    And while you could argue "well their stats will even out", coaching along with situation can unexpectedly revive 
+                    And while you could argue "well their stats would even out", coaching along with situation can unexpectedly revive 
                     or ruin players' careers. No  matter how many factors you account for, <strong>predicting a player's future is not 
                     an exact science.</strong>
                 </p>

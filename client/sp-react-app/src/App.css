@@ -308,6 +308,11 @@ containing the buttons, aka the surrounding div element */
   font-weight: bold;
 }
 
+/* Use this class for the text in the about and method screens */
+.about-select{
+  margin-left: 2%;
+  margin-right: 2%;
+}
 
 @keyframes fadeIn {
   0% {
