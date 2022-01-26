@@ -3,6 +3,12 @@
 This is a website focused on determining a player's future statistics. 
 Currently available for basketball but meant to be a tool for football as well.
 
+React version:
+
+https://user-images.githubusercontent.com/65587199/151100886-b322d66e-f306-459b-b500-040a27194b43.mov
+
+HTML/CSS/JavaScript Version:
+
 <img src="http://g.recordit.co/43pJz5tuRv.gif"/>
 
 ## Factors
