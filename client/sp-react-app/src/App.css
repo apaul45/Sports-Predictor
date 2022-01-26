@@ -303,10 +303,12 @@ containing the buttons, aka the surrounding div element */
   -ms-animation: fadeIn ease 6s;
   }
 
-  .prediction-card{
-    font-size: 25pt;
-    font-weight: bold;
-  }
+.prediction-card{
+  font-size: 25pt;
+  font-weight: bold;
+}
+
+
 @keyframes fadeIn {
   0% {
     opacity:0;

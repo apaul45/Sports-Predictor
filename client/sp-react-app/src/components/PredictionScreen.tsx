@@ -17,11 +17,7 @@ import Player from '../classes/player-model';
 import playerGraph from '../classes/player-graph';
 import {useAppDispatch} from '../reduxHookTypes';
 import {addPrediction, setError, fetchPredictions} from '../slices/prediction';
-import {fetchUsers} from '../slices/auth';
-import {login} from '../slices/auth';
-import { 
-    CREATE_PREDICTION,
-} from "../GraphQL/Mutations";
+import {CREATE_PREDICTION} from "../GraphQL/Mutations";
 
 /* This interface defines the types of props passed into the
 shorter method and longer method components */

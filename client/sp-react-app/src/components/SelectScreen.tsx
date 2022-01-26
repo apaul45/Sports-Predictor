@@ -13,7 +13,7 @@ export default function SelectScreen(){
             
             <Button variant="outlined"
             onClick={() => navigate("/home/")}
-            style={{position: "absolute", left:"6.5%", bottom:"76.6%    ????????????????????"}}>
+            style={{position: "absolute", left:"6.5%", bottom:"76.6%"}}>
                 <ArrowBackIcon/>
                 Back
             </Button>
