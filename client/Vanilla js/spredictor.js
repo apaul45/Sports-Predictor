@@ -13,6 +13,7 @@ let subtractValues = [[0,-.3,-.8,-1.5], [0, -2,-3,-3.55], [0,-.45,-.6,-1.5]];
 let istate = "";
 let role = "";
 let fa = "";
+
 function compare(a,b){
     if (a.teamId < b.teamId) 
         return -1;
@@ -447,7 +448,7 @@ function getRandomColor() {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-  }
+}
 displayPlayers();
 retrieveTeams();
 createIPGraph();

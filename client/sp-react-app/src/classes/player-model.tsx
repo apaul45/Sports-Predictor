@@ -1,12 +1,12 @@
-import axios from "axios";
-import playerGraph from '../classes/player-graph';
 /*
     This class contains the necessary info for a player, along with the 
     methods necessary to calculate a prediction
 
     The player's info can then be saved to the backend
 */
-const teamStandings = JSON.parse(localStorage.getItem("nba-teams") || "{}");
+import axios from "axios";
+import playerGraph from '../classes/player-graph';
+import teamStandings from '../nba.json';
 
 /* 
     Each entry in perGameWeights is mapped to 
@@ -111,7 +111,7 @@ export default class Player {
                      ("team" in this.info ? this.info.team :
                      this.info.team_abbreviation));
 
-        const team = teamStandings[index].standingsData;
+        const team:any = teamStandings[index].standingsData;
         
         const conferenceStanding = team.conference.rank;
 

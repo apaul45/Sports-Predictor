@@ -14,7 +14,6 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-
 const typeDefs = require("../server/graphql/typedefs/root-defs");
 const resolvers = require("../server/graphql/resolvers/root-resolvers");
 
@@ -92,3 +91,5 @@ mongoose
     .catch(e => {
         console.error('Connection error', e.message)
     });
+
+
